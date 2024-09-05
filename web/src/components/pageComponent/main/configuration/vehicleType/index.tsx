@@ -1,11 +1,11 @@
-import { Title } from "@mantine/core";
-
+import { Button, Title } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 import {
   useDeleteCategory,
   useGetVehicleTypes,
 } from "../../../../../hooks/apis/main/configuration/vehicleType";
 import { VehicleTypeList } from "./vehicleTypeList";
+import { IconFilter, IconPlus } from "@tabler/icons-react";
 
 export const VehicleType = () => {
   const navigate = useNavigate();
@@ -27,6 +27,23 @@ export const VehicleType = () => {
     <>
       <div className="flex justify-between">
         <Title order={3}>Vehicle Types</Title>
+        <div className="flex gap-4">
+          <Button
+            leftSection={<IconPlus size={"1rem"} />}
+            color="gray"
+            variant="light"
+            onClick={() => navigate("./add")}
+          >
+            Add
+          </Button>
+          <Button
+            leftSection={<IconFilter size={"1rem"} />}
+            color="gray"
+            variant="light"
+          >
+            Filter
+          </Button>
+        </div>
       </div>
       <VehicleTypeList
         vehicleTypes={vehicleTypes}

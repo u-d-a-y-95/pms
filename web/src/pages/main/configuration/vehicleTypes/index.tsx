@@ -1,4 +1,5 @@
 import { VehicleType } from "../../../../components/pageComponent/main/configuration/vehicleType";
+import { AddVehicleType } from "../../../../components/pageComponent/main/configuration/vehicleType/addVehicleType";
 import { VehicleTypeList } from "../../../../components/pageComponent/main/configuration/vehicleType/vehicleTypeList";
 
 export const VehicleTypePage = () => {
@@ -9,4 +10,5 @@ export const VehicleTypePage = () => {
   );
 };
 
+VehicleTypePage.Add = AddVehicleType;
 VehicleTypePage.View = VehicleTypeList;

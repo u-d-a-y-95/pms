@@ -1,11 +1,11 @@
-import { ICategory } from "../components/pageComponent/main/configuration/category/index.types";
+import { IVehicleType } from "../components/pageComponent/main/configuration/vehicleType/index.types";
 import { http } from "../utils/http";
 
 export const getVehicleTypes = () => {
   return http.get(`/types`);
 };
-export const createCategory = (store: ICategory) => {
-  return http.post("/item-category", store);
+export const createVehicleTypes = (store: IVehicleType) => {
+  return http.post("/types", store);
 };
 
 export const deleteCategory = (id: string) => {

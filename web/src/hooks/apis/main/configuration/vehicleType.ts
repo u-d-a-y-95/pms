@@ -1,5 +1,5 @@
 import {
-  createCategory,
+  createVehicleTypes,
   deleteCategory,
   getCategoryById,
   getVehicleTypes,
@@ -10,19 +10,19 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 
 export const useGetVehicleTypes = () => {
   return useQuery({
-    queryKey: ["types"],
+    queryKey: ["vehicleTypes"],
     queryFn: getVehicleTypes,
   });
 };
 
-export const useCreateCategory = () => {
+export const useCreateVehicleType = () => {
   const client = useQueryClient();
   return useMutation({
-    mutationKey: ["category", "create"],
-    mutationFn: createCategory,
+    mutationKey: ["vehicleTypes", "create"],
+    mutationFn: createVehicleTypes,
     onSuccess: () => {
-      toast.success("New Category is created");
-      client.invalidateQueries(["categories"]);
+      toast.success("New Vehicle type is created");
+      client.invalidateQueries(["vehicleTypes"]);
     },
     onError: (err: any) => {
       toast.error(err.message);

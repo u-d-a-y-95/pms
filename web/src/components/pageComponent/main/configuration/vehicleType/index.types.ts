@@ -1,3 +1,5 @@
+import { UseFormReturnType } from "@mantine/form";
+
 export type VehicleTypeListProps = {
   isLoading: boolean;
   vehicleTypes: IVehicleType[];
@@ -14,6 +16,5 @@ export interface IVehicleType {
 type StateType = "view" | "add" | "edit";
 export interface IBaseStoreProps {
   state: StateType;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  form?: any;
+  form: UseFormReturnType<IVehicleType, (values: IVehicleType) => IVehicleType>;
 }

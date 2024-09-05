@@ -14,6 +14,7 @@ export const AppRoutes = () => {
             <Route path="" Component={SpacePage}></Route>
           </Route>
           <Route path="vehicle-types">
+            <Route path="add" Component={VehicleTypePage.Add}></Route>
             <Route path="view/:id" Component={VehicleTypePage.View}></Route>
             <Route path="" Component={VehicleTypePage}></Route>
           </Route>
