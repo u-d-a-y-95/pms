@@ -1,10 +1,10 @@
 import { useGetSpaces } from "../../../hooks/apis/configuration/space";
 import { useGetVehicleTypes } from "../../../hooks/apis/configuration/vehicleType";
 import { useGetParkings } from "../../../hooks/apis/parking";
-import { PlainCard } from "../../util/card";
+import { PlainCard } from "../../base/card/card";
 import { PieChart } from "@mantine/charts";
 
-export default function DashboardPage() {
+export default function Dashboard() {
   const { data: vehicleRes } = useGetVehicleTypes();
   const { data: parkingRes } = useGetParkings();
   const { data: spaceRes } = useGetSpaces();
@@ -20,15 +20,24 @@ export default function DashboardPage() {
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <PlainCard label={"Total Parked"} value={totalParked || ""} />
+        <PlainCard
+          label={"Total Parked"}
+          value={totalParked || ""}
+          bg="#d5eef6"
+        />
         <PlainCard
           label={"Total empty slot"}
           value={totalSpace - totalParked || ""}
+          bg="#e8d5f6"
         />
-        <PlainCard label={"Vehicle Types"} value={totalVehicleTypes} />
+        <PlainCard
+          label={"Vehicle Types"}
+          value={totalVehicleTypes}
+          bg="#f6d5d5"
+        />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-16">
-        <div className="rounded-lg shadow-md flex justify-center items-center p-6">
+        <div className="rounded-lg shadow-md flex justify-center items-center p-6 bg-[#edf3fb]">
           <PieChart
             withLabelsLine
             labelsPosition="inside"

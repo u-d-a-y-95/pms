@@ -3,11 +3,7 @@ import { AddVehicleType } from "../../../components/pageComponent/configuration/
 import { ViewVehicleType } from "../../../components/pageComponent/configuration/vehicleType/viewVehicleType";
 
 export const VehicleTypePage = () => {
-  return (
-    <>
-      <VehicleType />
-    </>
-  );
+  return <VehicleType />;
 };
 
 VehicleTypePage.Add = AddVehicleType;

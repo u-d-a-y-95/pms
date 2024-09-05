@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { VehicleTypeBaseForm } from "./baseForm";
 import { vehicleInitialValue } from "./utils";
 import { useGetVehicleTypeById } from "../../../../hooks/apis/configuration/vehicleType";
+import { IVehicleType } from "./index.types";
 
 export const ViewVehicleType = () => {
   const { id } = useParams();
@@ -19,7 +20,7 @@ export const ViewVehicleType = () => {
 
   useEffect(() => {
     if (data) {
-      form.setValues(data.data);
+      form.setValues(data.data as Partial<IVehicleType>);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
@@ -27,7 +28,7 @@ export const ViewVehicleType = () => {
   return (
     <>
       <Title order={3} style={{ textTransform: "capitalize" }}>
-        View
+        View Vehicle Type
       </Title>
       <VehicleTypeBaseForm state="view" form={form} />
       <form className="mt-5">

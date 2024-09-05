@@ -2,20 +2,15 @@ import axios from "axios";
 
 axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
 
+export interface IError {
+  message: string;
+}
+
 interface IResponse {
   status: number;
   message: string;
   data: unknown;
 }
-
-axios.interceptors.request.use((config) => {
-  const storage = localStorage.getItem("bms-storage-auth") || "";
-  const token = storage ? JSON.parse(storage).token : "";
-  if (token) {
-    config.headers["Authorization"] = `bearer ${token}`;
-  }
-  return config;
-});
 
 axios.interceptors.response.use(
   (res) => {

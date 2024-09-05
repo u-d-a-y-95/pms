@@ -1,15 +1,8 @@
-import {
-  ActionIcon,
-  LoadingOverlay,
-  Table,
-  Text,
-  Tooltip,
-} from "@mantine/core";
-
+import { LoadingOverlay, Table, Text } from "@mantine/core";
 import { IconEye, IconTrash } from "@tabler/icons-react";
-import { FC, ReactNode } from "react";
 import { modals } from "@mantine/modals";
 import { VehicleTypeListProps, IVehicleType } from "./index.types";
+import { ActionBtn } from "../../../base/actionBtn";
 
 const { Thead, Tbody, Tr, Th, Td } = Table;
 
@@ -52,7 +45,7 @@ export const VehicleTypeList = ({
             <Tr>
               <Th w={50}>#</Th>
               <Th>Name</Th>
-              <Th>Descript</Th>
+              <Th style={{ width: "500px" }}>Description</Th>
               <Th>Charge</Th>
               <Th style={{ width: "150px" }}>
                 <div className="text-center">Action</div>
@@ -93,29 +86,5 @@ export const VehicleTypeList = ({
         </Table>
       </div>
     </>
-  );
-};
-interface ActionBtnProps {
-  label: string;
-  clickHandler: () => void;
-  Icon: ReactNode;
-}
-const ActionBtn: FC<ActionBtnProps> = ({
-  label,
-  clickHandler,
-  Icon,
-}: ActionBtnProps) => {
-  return (
-    <Tooltip label={label} variant="light" color="gray" withArrow>
-      <ActionIcon
-        size={"sm"}
-        onClick={clickHandler}
-        variant="outline"
-        p="3"
-        color="gray"
-      >
-        {Icon}
-      </ActionIcon>
-    </Tooltip>
   );
 };

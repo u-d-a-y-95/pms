@@ -27,7 +27,7 @@ export const AddVehicleType = () => {
   return (
     <>
       <Title order={3} style={{ textTransform: "capitalize" }}>
-        Add Store
+        Add Vehicle Type
       </Title>
       <form
         className="mt-5"

@@ -24,12 +24,13 @@ export const VehicleTypeBaseForm = ({ form, state }: IBaseStoreProps) => {
           disabled={state === "view"}
         />
       </div>
-      <div className="grid grid-cols-3  gap-5">
+      <div className="grid grid-cols-3 gap-5 col-span-3">
         <Textarea
           label="Description"
           placeholder="Plase enter description about the type"
           {...form?.getInputProps("description")}
           disabled={state === "view"}
+          rows={5}
         />
       </div>
     </div>
