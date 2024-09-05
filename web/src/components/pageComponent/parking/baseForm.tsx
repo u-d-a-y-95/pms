@@ -1,7 +1,7 @@
 import { Select, Textarea, TextInput } from "@mantine/core";
 import { IBaseStoreProps } from "./index.types";
-import { useGetVehicleTypes } from "../../../../hooks/apis/main/configuration/vehicleType";
-import { useGetSpaces } from "../../../../hooks/apis/main/configuration/space";
+import { useGetVehicleTypes } from "../../../hooks/apis/configuration/vehicleType";
+import { useGetSpaces } from "../../../hooks/apis/configuration/space";
 
 export const ParkingBaseForm = ({ form, state }: IBaseStoreProps) => {
   const { data: vehicleRes } = useGetVehicleTypes();

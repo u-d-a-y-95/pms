@@ -1,12 +1,11 @@
 import { Button, Title } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
 import { useNavigate } from "react-router-dom";
-import { VehicleTypeBaseForm } from "./baseForm";
-import { IVehicleType } from "./index.types";
+import { ParkingBaseForm } from "./baseForm";
 import { schema, vehicleInitialValue } from "./utils";
-import { useCreateVehicleType } from "../../../../../hooks/apis/main/configuration/vehicleType";
+import { useCreateParking } from "../../../hooks/apis/parking";
 
-export const AddVehicleType = () => {
+export const AddParking = () => {
   const navigate = useNavigate();
 
   const form = useForm({
@@ -15,9 +14,9 @@ export const AddVehicleType = () => {
     validate: zodResolver(schema),
   });
 
-  const { mutateAsync: createMutation } = useCreateVehicleType();
+  const { mutateAsync: createMutation } = useCreateParking();
 
-  const save = async (values: IVehicleType) => {
+  const save = async (values: IProduct) => {
     const res = await createMutation(values);
     if ([200, 201].includes(res.status)) {
       form.reset();
@@ -27,16 +26,15 @@ export const AddVehicleType = () => {
   return (
     <>
       <Title order={3} style={{ textTransform: "capitalize" }}>
-        Add Store
+        Add Parking
       </Title>
       <form
         className="mt-5"
-        onSubmit={form.onSubmit((v: IVehicleType) => save(v))}
+        onSubmit={form.onSubmit((v) => save(v))}
         onReset={form.onReset}
       >
-        <VehicleTypeBaseForm form={form} state="add" />
-
-        <div className="flex justify-end gap-5">
+        <ParkingBaseForm state="add" form={form} />
+        <div className="flex justify-end gap-5 mt-10">
           <Button
             variant="outline"
             color="gray"

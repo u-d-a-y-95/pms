@@ -1,12 +1,9 @@
 import { Button, Title } from "@mantine/core";
 import { IconFilter, IconPlus } from "@tabler/icons-react";
 import { useNavigate } from "react-router-dom";
-import {
-  useDeleteProduct,
-  useGetParkings,
-} from "../../../../hooks/apis/main/products";
-import { IProduct } from "./index.types";
+
 import { ParkingList } from "./parkingList";
+import { useDeleteProduct, useGetParkings } from "../../../hooks/apis/parking";
 
 export default function Parking() {
   const navigate = useNavigate();

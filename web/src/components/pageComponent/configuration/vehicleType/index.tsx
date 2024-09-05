@@ -1,11 +1,11 @@
 import { Button, Title } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
+import { VehicleTypeList } from "./vehicleTypeList";
+import { IconFilter, IconPlus } from "@tabler/icons-react";
 import {
   useDeleteVehicleType,
   useGetVehicleTypes,
-} from "../../../../../hooks/apis/main/configuration/vehicleType";
-import { VehicleTypeList } from "./vehicleTypeList";
-import { IconFilter, IconPlus } from "@tabler/icons-react";
+} from "../../../../hooks/apis/configuration/vehicleType";
 
 export const VehicleType = () => {
   const navigate = useNavigate();

@@ -1,22 +1,18 @@
-import {
-  useDeleteSpace,
-  useDeleteStore,
-  useGetSpaces,
-} from "../../../../../hooks/apis/main/configuration/space";
 import { Button, Title } from "@mantine/core";
 import { IconFilter, IconPlus } from "@tabler/icons-react";
 import { useNavigate } from "react-router-dom";
 import { SpaceList } from "./spaceList";
 import { ISpace } from "./index.types";
+import { useGetSpaces } from "../../../../hooks/apis/configuration/space";
 
-export const Space = () => {
+export const Spaces = () => {
   const navigate = useNavigate();
 
   const { data: res, isLoading, isFetching } = useGetSpaces();
-  const { mutate: deleteMutate } = useDeleteSpace();
+  // const { mutate: deleteMutate } = useDeleteSpacs();
 
   const deleteSpace = (id: string) => {
-    deleteMutate(id);
+    // deleteMutate(id);
   };
 
   const viewStoreById = (id: string) => {

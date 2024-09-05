@@ -1,8 +1,8 @@
-import { useGetStoreById } from "../../../../../hooks/apis/main/configuration/space";
 import { Button, Title } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
+import { useGetStoreById } from "../../../../hooks/apis/configuration/space";
 
 export const ViewSpace = () => {
   const { id } = useParams();

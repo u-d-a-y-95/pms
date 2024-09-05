@@ -1,12 +1,12 @@
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
   createParking,
   deleteItem,
-  getProductById,
   getParkings,
+  getProductById,
   newItemEntry,
-} from "../../../../services/items";
-import { toast } from "../../../../utils/toast";
-import { useMutation, useQuery, useQueryClient } from "react-query";
+} from "../../../services/items";
+import { toast } from "../../../utils/toast";
 
 export const useGetParkings = () => {
   return useQuery({
@@ -50,21 +50,5 @@ export const useGetProductById = (id: string | null) => {
     queryKey: ["product", id],
     queryFn: getProductById,
     enabled: !!id,
-  });
-};
-
-export const useNewItemEntry = () => {
-  const client = useQueryClient();
-  return useMutation({
-    mutationKey: ["product", "new-entry"],
-    mutationFn: newItemEntry,
-    onSuccess: (res) => {
-      toast.success("Product is updated successfully");
-      client.invalidateQueries(["parkings"]);
-      client.invalidateQueries(["product", res?.data.id]);
-    },
-    onError: (err: any) => {
-      toast.error(err.message);
-    },
   });
 };

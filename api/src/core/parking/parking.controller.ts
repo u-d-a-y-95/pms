@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { ParkingService } from './parking.service';
 import { CreateParkingDto } from './dto/create-parking.dto';
@@ -23,8 +24,15 @@ export class ParkingController {
   }
 
   @Get()
-  findAll() {
-    return this.parkingService.find();
+  findAll(@Query('date') date: string) {
+    console.log(date);
+    return this.parkingService.find({
+      ...(date && {
+        where: {
+          entryTime: new Date(date),
+        },
+      }),
+    });
   }
 
   @Get(':id')

@@ -7,7 +7,7 @@ import {
   IconCategory,
 } from "@tabler/icons-react";
 import { NavLink as Link, useLocation } from "react-router-dom";
-import { LinkType } from "../../types/layout";
+import { LinkType } from "./index.type";
 
 const navs: LinkType[] = [
   {
@@ -25,7 +25,7 @@ const navs: LinkType[] = [
 
   {
     label: "Configuration",
-    url: "",
+    url: "n/a",
     icon: IconSettings,
     children: [
       {

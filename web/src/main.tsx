@@ -1,15 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
-import "@mantine/core/styles.css";
-import "./index.css";
-import "@mantine/notifications/styles.css";
 import { MantineProvider } from "@mantine/core";
 import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { AuthContextProvider } from "./state/auth/index.tsx";
 import { Notifications } from "@mantine/notifications";
 import { ModalsProvider } from "@mantine/modals";
+import "@mantine/core/styles.css";
+import "@mantine/charts/styles.css";
+import "./index.css";
+import "@mantine/notifications/styles.css";
 
 const client = new QueryClient();
 

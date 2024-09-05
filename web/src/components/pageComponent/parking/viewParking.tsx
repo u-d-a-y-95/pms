@@ -2,20 +2,21 @@ import { Button, Title } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
-import { useGetVehicleTypeById } from "../../../../../hooks/apis/main/configuration/vehicleType";
-import { VehicleTypeBaseForm } from "./baseForm";
-import { vehicleInitialValue } from "./utils";
+import { useGetProductById } from "../../../hooks/apis/parking";
 
-export const ViewVehicleType = () => {
+export const ViewParking = () => {
   const { id } = useParams();
 
   const navigate = useNavigate();
 
   const form = useForm({
-    initialValues: vehicleInitialValue,
+    initialValues: {
+      name: "",
+      email: "",
+    },
   });
 
-  const { data } = useGetVehicleTypeById(id as string);
+  const { data } = useGetProductById(id as string);
 
   useEffect(() => {
     if (data) {
@@ -27,11 +28,12 @@ export const ViewVehicleType = () => {
   return (
     <>
       <Title order={3} style={{ textTransform: "capitalize" }}>
-        View
+        View Product
       </Title>
-      <VehicleTypeBaseForm state="view" form={form} />
       <form className="mt-5">
-        <div className="flex justify-end gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5"></div>
+
+        <div className="flex justify-end gap-5 mt-10">
           <Button
             variant="outline"
             color="gray"

@@ -1,12 +1,12 @@
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
   createStore,
   deleteSpaceById,
   getSpaces,
   getStoreById,
   updateEmployee,
-} from "../../../../services/store";
-import { toast } from "../../../../utils/toast";
-import { useMutation, useQuery, useQueryClient } from "react-query";
+} from "../../../services/spaces";
+import { toast } from "../../../utils/toast";
 
 export const useGetSpaces = () => {
   return useQuery({

@@ -1,8 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 import Layout from "../components/layout";
-import SpacePage from "../pages/main/configuration/spaces";
-import { VehicleTypePage } from "../pages/main/configuration/vehicleTypes";
-import ParkingPage from "../pages/main/parking";
+import SpacePage from "../pages/configuration/spaces";
+import { VehicleTypePage } from "../pages/configuration/vehicleTypes";
+import ParkingPage from "../pages/parking";
+import DashboardPage from "../components/pageComponent/dashboard";
 
 export const AppRoutes = () => {
   return (
@@ -22,9 +23,9 @@ export const AppRoutes = () => {
         <Route path="parking">
           <Route path="add" Component={ParkingPage.Add}></Route>
           <Route path="view/:id" Component={ParkingPage.View}></Route>
-          <Route path="entry/:id" Component={ParkingPage.Entry}></Route>
           <Route path="" Component={ParkingPage}></Route>
         </Route>
+        <Route path="" Component={DashboardPage}></Route>
       </Route>
     </Routes>
   );

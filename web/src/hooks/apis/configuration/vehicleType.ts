@@ -1,12 +1,11 @@
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
   createVehicleTypes,
   deleteVehicleTypes,
   getVehicleTypeById,
   getVehicleTypes,
-} from "../../../../services/vehicleTypes";
-
-import { toast } from "../../../../utils/toast";
-import { useMutation, useQuery, useQueryClient } from "react-query";
+} from "../../../services/vehicleTypes";
+import { toast } from "../../../utils/toast";
 
 export const useGetVehicleTypes = () => {
   return useQuery({
