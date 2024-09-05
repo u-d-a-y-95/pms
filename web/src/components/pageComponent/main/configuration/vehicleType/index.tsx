@@ -1,7 +1,7 @@
 import { Button, Title } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 import {
-  useDeleteCategory,
+  useDeleteVehicleType,
   useGetVehicleTypes,
 } from "../../../../../hooks/apis/main/configuration/vehicleType";
 import { VehicleTypeList } from "./vehicleTypeList";
@@ -11,7 +11,7 @@ export const VehicleType = () => {
   const navigate = useNavigate();
 
   const { data: res, isLoading, isFetching } = useGetVehicleTypes();
-  const { mutate: deleteMutate } = useDeleteCategory();
+  const { mutate: deleteMutate } = useDeleteVehicleType();
 
   const deleteCategory = (id: string) => {
     deleteMutate(id);

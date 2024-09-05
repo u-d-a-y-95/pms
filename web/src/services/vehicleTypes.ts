@@ -8,8 +8,8 @@ export const createVehicleTypes = (store: IVehicleType) => {
   return http.post("/types", store);
 };
 
-export const deleteCategory = (id: string) => {
-  return http.delete(`/item-category/${id}`);
+export const deleteVehicleTypes = (id: string) => {
+  return http.delete(`/types/${id}`);
 };
 export const getVehicleTypeById = ({ queryKey }: any) => {
   const id: string = queryKey[1];

@@ -1,6 +1,6 @@
 import {
   createVehicleTypes,
-  deleteCategory,
+  deleteVehicleTypes,
   getVehicleTypeById,
   getVehicleTypes,
 } from "../../../../services/vehicleTypes";
@@ -30,14 +30,14 @@ export const useCreateVehicleType = () => {
   });
 };
 
-export const useDeleteCategory = () => {
+export const useDeleteVehicleType = () => {
   const client = useQueryClient();
   return useMutation({
-    mutationKey: ["category", "delete"],
-    mutationFn: deleteCategory,
+    mutationKey: ["vehicleTypes", "delete"],
+    mutationFn: deleteVehicleTypes,
     onSuccess: () => {
-      toast.success("Category is deleted successfully");
-      client.invalidateQueries(["categories"]);
+      toast.success("Vehicle type is deleted successfully");
+      client.invalidateQueries(["vehicleTypes"]);
     },
     onError: (err: any) => {
       toast.error(err.message);
