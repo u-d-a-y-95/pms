@@ -53,34 +53,43 @@ export const SpaceList: FC<StoreListProps> = ({
             <Tr>
               <Th w={50}>#</Th>
               <Th>Name</Th>
+              <Th>Capacities</Th>
               <Th style={{ width: "150px" }}>
                 <div className="text-center">Action</div>
               </Th>
             </Tr>
           </Thead>
           <Tbody>
-            {spaces?.map(({ id = "", name }: ISpace, index: number) => (
-              <Tr key={id}>
-                <Td>{index + 1}</Td>
-                <Td>{name}</Td>
-                <Td style={{ width: "200px" }}>
-                  <div className="flex justify-center gap-3">
-                    <ActionBtn
-                      label="View"
-                      clickHandler={() => {
-                        viewStoreById(id);
-                      }}
-                      Icon={<IconEye />}
-                    />
-                    <ActionBtn
-                      label="Delete"
-                      clickHandler={() => deleteConformation(id)}
-                      Icon={<IconTrash />}
-                    />
-                  </div>
-                </Td>
-              </Tr>
-            ))}
+            {spaces?.map(
+              ({ id = "", name, capacites }: ISpace, index: number) => (
+                <Tr key={id}>
+                  <Td>{index + 1}</Td>
+                  <Td>{name}</Td>
+                  <Td>
+                    {capacites
+                      .flat()
+                      .map((item) => `${item.count} ${item.vehicleType.name} `)
+                      .join(" ,")}
+                  </Td>
+                  <Td style={{ width: "200px" }}>
+                    <div className="flex justify-center gap-3">
+                      <ActionBtn
+                        label="View"
+                        clickHandler={() => {
+                          viewStoreById(id);
+                        }}
+                        Icon={<IconEye />}
+                      />
+                      <ActionBtn
+                        label="Delete"
+                        clickHandler={() => deleteConformation(id)}
+                        Icon={<IconTrash />}
+                      />
+                    </div>
+                  </Td>
+                </Tr>
+              )
+            )}
           </Tbody>
         </Table>
       </div>

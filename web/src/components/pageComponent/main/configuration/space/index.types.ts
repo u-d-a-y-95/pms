@@ -1,3 +1,5 @@
+import { IVehicleType } from "../vehicleType/index.types";
+
 export interface StoreListProps {
   isLoading: boolean;
   spaces: ISpace[];
@@ -5,9 +7,15 @@ export interface StoreListProps {
   viewStoreById: (id: string) => void;
 }
 
+export type Capacity = {
+  count: number;
+  vehicleType: IVehicleType;
+};
+
 export interface ISpace {
   id?: string;
   name: string;
+  capacites: Capacity[];
 }
 type StateType = "view" | "add" | "edit";
 export interface IBaseStoreProps {

@@ -1,4 +1,5 @@
 import {
+  useDeleteSpace,
   useDeleteStore,
   useGetSpaces,
 } from "../../../../../hooks/apis/main/configuration/space";
@@ -12,9 +13,9 @@ export const Space = () => {
   const navigate = useNavigate();
 
   const { data: res, isLoading, isFetching } = useGetSpaces();
-  const { mutate: deleteMutate } = useDeleteStore();
+  const { mutate: deleteMutate } = useDeleteSpace();
 
-  const deleteStore = (id: string) => {
+  const deleteSpace = (id: string) => {
     deleteMutate(id);
   };
 
@@ -32,7 +33,7 @@ export const Space = () => {
       <SpaceList
         spaces={spaces as ISpace[]}
         isLoading={isLoading || isFetching}
-        deleteStore={deleteStore}
+        deleteStore={deleteSpace}
         viewStoreById={viewStoreById}
       />
     </>

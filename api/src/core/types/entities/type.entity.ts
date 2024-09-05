@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { SizeEntity } from 'src/core/spaces/entities/size.entity';
+import { CapacityEntity } from 'src/core/spaces/entities/capacity.entity';
 import { BaseEntity } from 'src/shared/entities/base.entity';
-import { Column, Entity, ManyToMany, OneToOne } from 'typeorm';
+import { Column, Entity, ManyToMany } from 'typeorm';
 
 @Entity('types')
 export class TypeEntity extends BaseEntity {
@@ -23,6 +23,6 @@ export class TypeEntity extends BaseEntity {
   @ApiProperty()
   charge: number;
 
-  @ManyToMany(() => SizeEntity, (size) => size.vehicleTypes)
-  sizes: SizeEntity[];
+  @ManyToMany(() => CapacityEntity, (size) => size.vehicleType)
+  capacites: CapacityEntity[];
 }

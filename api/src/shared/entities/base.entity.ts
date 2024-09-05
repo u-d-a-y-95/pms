@@ -3,7 +3,6 @@ import { createId } from '@paralleldrive/cuid2';
 import {
   BeforeInsert,
   CreateDateColumn,
-  DeleteDateColumn,
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';

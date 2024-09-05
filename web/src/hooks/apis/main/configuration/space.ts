@@ -1,6 +1,6 @@
 import {
   createStore,
-  deleteStore,
+  deleteSpaceById,
   getSpaces,
   getStoreById,
   updateEmployee,
@@ -45,14 +45,14 @@ export const useUpdateEmployees = () => {
   });
 };
 
-export const useDeleteStore = () => {
+export const useDeleteSpace = () => {
   const client = useQueryClient();
   return useMutation({
-    mutationKey: ["store", "delete"],
-    mutationFn: deleteStore,
+    mutationKey: ["spaces", "delete"],
+    mutationFn: deleteSpaceById,
     onSuccess: () => {
-      toast.success("Store is deleted successfully");
-      client.invalidateQueries(["stores"]);
+      toast.success("Space is deleted successfully");
+      client.invalidateQueries(["spaces"]);
     },
     onError: (err: any) => {
       toast.error(err.message);

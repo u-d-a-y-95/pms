@@ -1,12 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
 import { SpacesService } from './spaces.service';
 import { CreateSpaceDto } from './dto/create-space.dto';
 import { UpdateSpaceDto } from './dto/update-space.dto';
@@ -24,7 +16,9 @@ export class SpacesController {
 
   @Get()
   findAll() {
-    return this.spacesService.find({ relations: { sizes: true } });
+    return this.spacesService.find({
+      relations: { capacites: { vehicleType: true } },
+    });
   }
 
   @Get(':id')
@@ -37,8 +31,8 @@ export class SpacesController {
   //   return this.spacesService.update(+id, updateSpaceDto);
   // }
 
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.spacesService.remove(+id);
-  // }
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.spacesService.removeById(id);
+  }
 }

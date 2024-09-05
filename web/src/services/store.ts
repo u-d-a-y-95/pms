@@ -11,8 +11,8 @@ export const updateEmployee = ({ id, employee }: any) => {
   return http.put(`/org/employees/${id}`, employee);
 };
 
-export const deleteStore = (id: string) => {
-  return http.delete(`/store/${id}`);
+export const deleteSpaceById = (id: string) => {
+  return http.delete(`/spaces/${id}`);
 };
 export const getStoreById = ({ queryKey }: any) => {
   const id: string = queryKey[1];
