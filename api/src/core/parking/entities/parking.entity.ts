@@ -1,20 +1,40 @@
-import { VehicleEntity } from 'src/core/vehicles/entities/vehicle.entity';
+import { SpaceEntity } from 'src/core/spaces/entities/space.entity';
+import { TypeEntity } from 'src/core/types/entities/type.entity';
 import { BaseEntity } from 'src/shared/entities/base.entity';
 import { Column, Entity, ManyToOne } from 'typeorm';
 
 @Entity('parking')
 export class ParkingEntity extends BaseEntity {
+  @Column({})
+  name: string;
+
+  @Column({ nullable: true })
+  phone: string;
+
+  @Column()
+  license: string;
+
+  @Column({ nullable: true })
+  address: string;
+
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   entryTime: Date;
 
   @Column({ type: 'timestamp', nullable: true })
   exitTime: Date;
 
-  @Column({})
+  @Column({ nullable: true })
   charge: number;
 
-  @ManyToOne(() => VehicleEntity, (vehicle) => vehicle.parkings)
-  vehicle: VehicleEntity;
+  @ManyToOne(() => SpaceEntity, (space) => space.parkings)
+  space: SpaceEntity;
 
-  // Parking charge ->
+  @Column()
+  spaceId: string;
+
+  @ManyToOne(() => TypeEntity, (type) => type.parkings)
+  vehicleType: TypeEntity;
+
+  @Column()
+  vehicleTypeId: string;
 }

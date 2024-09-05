@@ -24,21 +24,25 @@ export class ParkingController {
 
   @Get()
   findAll() {
-    return this.parkingService.findAll();
+    return this.parkingService.find({
+      relations: {
+        vehicleType: true,
+      },
+    });
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.parkingService.findOne(+id);
+    return this.parkingService.findById(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateParkingDto: UpdateParkingDto) {
-    return this.parkingService.update(+id, updateParkingDto);
+    return this.parkingService.updateById(id, updateParkingDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.parkingService.remove(+id);
+    return this.parkingService.removeById(id);
   }
 }

@@ -40,7 +40,7 @@ export class TypesController {
     summary: 'Retrieves a list of all types',
   })
   async findAll(): Promise<TypeEntity[]> {
-    return await this.typesService.find({});
+    return await this.typesService.find();
   }
 
   @Get(':id')

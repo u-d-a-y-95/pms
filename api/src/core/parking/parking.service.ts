@@ -1,26 +1,15 @@
 import { Injectable } from '@nestjs/common';
-import { CreateParkingDto } from './dto/create-parking.dto';
-import { UpdateParkingDto } from './dto/update-parking.dto';
+import { BaseService } from 'src/shared/service/base.service';
+import { ParkingEntity } from './entities/parking.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
-export class ParkingService {
-  create(createParkingDto: CreateParkingDto) {
-    return 'This action adds a new parking';
-  }
-
-  findAll() {
-    return `This action returns all parking`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} parking`;
-  }
-
-  update(id: number, updateParkingDto: UpdateParkingDto) {
-    return `This action updates a #${id} parking`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} parking`;
+export class ParkingService extends BaseService<ParkingEntity> {
+  constructor(
+    @InjectRepository(ParkingEntity)
+    private parkingRepository: Repository<ParkingEntity>,
+  ) {
+    super(parkingRepository);
   }
 }
