@@ -17,7 +17,7 @@ export class CapacityEntity extends BaseEntity {
   @Column()
   spaceId: string;
 
-  @ManyToOne(() => TypeEntity, (types) => types.capacites)
+  @ManyToOne(() => TypeEntity, (types) => types.capacites, { eager: true })
   @JoinColumn()
   vehicleType: TypeEntity;
 

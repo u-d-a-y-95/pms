@@ -24,11 +24,7 @@ export class ParkingController {
 
   @Get()
   findAll() {
-    return this.parkingService.find({
-      relations: {
-        vehicleType: true,
-      },
-    });
+    return this.parkingService.find();
   }
 
   @Get(':id')

@@ -9,6 +9,7 @@ export class SpaceEntity extends BaseEntity {
   name: string;
 
   @OneToMany(() => CapacityEntity, (capacity) => capacity.space, {
+    eager: true,
     cascade: true,
   })
   capacites: CapacityEntity[];

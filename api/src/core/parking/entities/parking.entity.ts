@@ -1,7 +1,7 @@
 import { SpaceEntity } from 'src/core/spaces/entities/space.entity';
 import { TypeEntity } from 'src/core/types/entities/type.entity';
 import { BaseEntity } from 'src/shared/entities/base.entity';
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 
 @Entity('parking')
 export class ParkingEntity extends BaseEntity {
@@ -26,13 +26,15 @@ export class ParkingEntity extends BaseEntity {
   @Column({ nullable: true })
   charge: number;
 
-  @ManyToOne(() => SpaceEntity, (space) => space.parkings)
+  @ManyToOne(() => SpaceEntity, (space) => space.parkings, { eager: true })
+  @JoinColumn()
   space: SpaceEntity;
 
   @Column()
   spaceId: string;
 
-  @ManyToOne(() => TypeEntity, (type) => type.parkings)
+  @ManyToOne(() => TypeEntity, (type) => type.parkings, { eager: true })
+  @JoinColumn()
   vehicleType: TypeEntity;
 
   @Column()
