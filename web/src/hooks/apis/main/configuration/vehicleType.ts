@@ -1,7 +1,7 @@
 import {
   createVehicleTypes,
   deleteCategory,
-  getCategoryById,
+  getVehicleTypeById,
   getVehicleTypes,
 } from "../../../../services/vehicleTypes";
 
@@ -45,10 +45,10 @@ export const useDeleteCategory = () => {
   });
 };
 
-export const useGetCategoryById = (id: string | null) => {
+export const useGetVehicleTypeById = (id: string | null) => {
   return useQuery({
-    queryKey: ["category", id],
-    queryFn: getCategoryById,
+    queryKey: ["vehicleTypes", id],
+    queryFn: getVehicleTypeById,
     enabled: !!id,
   });
 };

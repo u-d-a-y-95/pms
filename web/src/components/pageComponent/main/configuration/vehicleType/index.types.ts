@@ -16,5 +16,8 @@ export interface IVehicleType {
 type StateType = "view" | "add" | "edit";
 export interface IBaseStoreProps {
   state: StateType;
-  form: UseFormReturnType<IVehicleType, (values: IVehicleType) => IVehicleType>;
+  form?: UseFormReturnType<
+    IVehicleType,
+    (values: IVehicleType) => IVehicleType
+  >;
 }

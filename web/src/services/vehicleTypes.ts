@@ -11,7 +11,7 @@ export const createVehicleTypes = (store: IVehicleType) => {
 export const deleteCategory = (id: string) => {
   return http.delete(`/item-category/${id}`);
 };
-export const getCategoryById = ({ queryKey }: any) => {
+export const getVehicleTypeById = ({ queryKey }: any) => {
   const id: string = queryKey[1];
-  return http.get(`/item-category/${id}`);
+  return http.get(`/types/${id}`);
 };

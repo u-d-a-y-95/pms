@@ -2,21 +2,20 @@ import { Button, Title } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
-import { useGetCategoryById } from "../../../../../hooks/apis/main/configuration/vehicleType";
+import { useGetVehicleTypeById } from "../../../../../hooks/apis/main/configuration/vehicleType";
+import { VehicleTypeBaseForm } from "./baseForm";
+import { vehicleInitialValue } from "./utils";
 
-export const ViewCategory = () => {
+export const ViewVehicleType = () => {
   const { id } = useParams();
 
   const navigate = useNavigate();
 
   const form = useForm({
-    initialValues: {
-      itemCategoryName: "",
-      description: "",
-    },
+    initialValues: vehicleInitialValue,
   });
 
-  const { data } = useGetCategoryById(id as string);
+  const { data } = useGetVehicleTypeById(id as string);
 
   useEffect(() => {
     if (data) {
@@ -28,8 +27,9 @@ export const ViewCategory = () => {
   return (
     <>
       <Title order={3} style={{ textTransform: "capitalize" }}>
-        View Store
+        View
       </Title>
+      <VehicleTypeBaseForm state="view" form={form} />
       <form className="mt-5">
         <div className="flex justify-end gap-5">
           <Button

@@ -9,7 +9,7 @@ export const VehicleTypeBaseForm = ({ form, state }: IBaseStoreProps) => {
           label="Name"
           placeholder="Plase enter name"
           withAsterisk
-          {...form.getInputProps("name")}
+          {...form?.getInputProps("name")}
           disabled={state === "view"}
         />
         <NumberInput
@@ -19,8 +19,8 @@ export const VehicleTypeBaseForm = ({ form, state }: IBaseStoreProps) => {
           withAsterisk
           allowNegative={false}
           clampBehavior="strict"
-          {...form.getInputProps("charge")}
-          onChange={(e) => form.getInputProps("charge").onChange(Number(e))}
+          {...form?.getInputProps("charge")}
+          onChange={(e) => form?.getInputProps("charge").onChange(Number(e))}
           disabled={state === "view"}
         />
       </div>
@@ -28,7 +28,7 @@ export const VehicleTypeBaseForm = ({ form, state }: IBaseStoreProps) => {
         <Textarea
           label="Description"
           placeholder="Plase enter description about the type"
-          {...form.getInputProps("description")}
+          {...form?.getInputProps("description")}
           disabled={state === "view"}
         />
       </div>
