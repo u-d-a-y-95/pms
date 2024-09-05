@@ -1,34 +1,20 @@
 import { Button, Title } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
 import { useNavigate } from "react-router-dom";
-import { z } from "zod";
-import { useCreateProduct } from "../../../../hooks/apis/main/products";
-import { IProduct } from "./index.types";
-
-const schema = z
-  .object({
-    itemName: z.string().min(1, { message: "name can't be empty" }),
-    availableQty: z.number().positive({ message: "positive only" }),
-    itemCategoryId: z.string().min(1, "select a category"),
-    description: z.string().optional(),
-  })
-  .transform((obj) => obj);
+import { useCreateParking } from "../../../../hooks/apis/main/products";
+import { ParkingBaseForm } from "./baseForm";
+import { schema, vehicleInitialValue } from "./utils";
 
 export const AddParking = () => {
   const navigate = useNavigate();
 
   const form = useForm({
     validateInputOnChange: true,
-    initialValues: {
-      itemName: "",
-      itemCategoryId: "",
-      availableQty: 0,
-      description: "",
-    },
+    initialValues: vehicleInitialValue,
     validate: zodResolver(schema),
   });
 
-  const { mutateAsync: createMutation } = useCreateProduct();
+  const { mutateAsync: createMutation } = useCreateParking();
 
   const save = async (values: IProduct) => {
     const res = await createMutation(values);
@@ -40,15 +26,14 @@ export const AddParking = () => {
   return (
     <>
       <Title order={3} style={{ textTransform: "capitalize" }}>
-        Add Product
+        Add Parking
       </Title>
       <form
         className="mt-5"
-        onSubmit={form.onSubmit((v: IProduct) => save(v))}
+        onSubmit={form.onSubmit((v) => save(v))}
         onReset={form.onReset}
       >
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5"></div>
-
+        <ParkingBaseForm state="add" form={form} />
         <div className="flex justify-end gap-5 mt-10">
           <Button
             variant="outline"

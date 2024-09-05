@@ -24,7 +24,7 @@ export class TypeEntity extends BaseEntity {
   @ApiProperty()
   charge: number;
 
-  @OneToMany(() => CapacityEntity, (size) => size.vehicleType)
+  @OneToMany(() => CapacityEntity, (size) => size.vehicleType, { eager: false })
   capacites: CapacityEntity[];
 
   @OneToMany(() => ParkingEntity, (parking) => parking.vehicleType)

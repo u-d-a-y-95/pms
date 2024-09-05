@@ -5,11 +5,11 @@ import {
   Text,
   Tooltip,
 } from "@mantine/core";
-
 import { IconCubePlus, IconEye, IconTrash } from "@tabler/icons-react";
 import { FC, ReactNode } from "react";
 import { modals } from "@mantine/modals";
-import { IProduct, ProductListProps } from "./index.types";
+import { IParking, ProductListProps } from "./index.types";
+import dayjs from "dayjs";
 
 const { Thead, Tbody, Tr, Th, Td } = Table;
 
@@ -54,9 +54,13 @@ export const ParkingList: FC<ProductListProps> = ({
             <Tr>
               <Th w={50}>#</Th>
               <Th>Name</Th>
-              <Th>Category</Th>
-              <Th>Available Quantity</Th>
-              <Th>Description</Th>
+              <Th>Phone</Th>
+              <Th>Address</Th>
+              <Th>License</Th>
+              <Th>Vehicle Type</Th>
+              <Th>Entry Time</Th>
+              <Th>Exit Time</Th>
+              <Th>Charge</Th>
               <Th style={{ width: "150px" }}>
                 <div className="text-center">Action</div>
               </Th>
@@ -65,15 +69,30 @@ export const ParkingList: FC<ProductListProps> = ({
           <Tbody>
             {products?.map(
               (
-                { id = "", itemName, description, availableQty }: IProduct,
+                {
+                  id = "",
+                  address,
+                  license,
+                  name,
+                  phone,
+                  vehicleType,
+                  entryTime,
+                  exitTime,
+                }: IParking,
                 index: number
               ) => (
                 <Tr key={id}>
                   <Td>{index + 1}</Td>
-                  <Td>{itemName}</Td>
-                  <Td>{}</Td>
-                  <Td>{availableQty}</Td>
-                  <Td>{description}</Td>
+                  <Td>{name}</Td>
+                  <Td>{phone}</Td>
+                  <Td>{address}</Td>
+                  <Td>{license}</Td>
+                  <Td>{vehicleType.name}</Td>
+                  <Td>{dayjs(entryTime).format("MMM D, YYYY h:mm A")}</Td>
+                  <Td>
+                    {exitTime && dayjs(exitTime).format("MMM D, YYYY h:mm A")}
+                  </Td>
+                  <Td></Td>
                   <Td style={{ width: "200px" }}>
                     <div className="flex justify-center gap-3">
                       <ActionBtn

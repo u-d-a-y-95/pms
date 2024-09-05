@@ -1,28 +1,28 @@
 import {
-  createItem,
+  createParking,
   deleteItem,
   getProductById,
-  getProducts,
+  getParkings,
   newItemEntry,
 } from "../../../../services/items";
 import { toast } from "../../../../utils/toast";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
-export const useGetProducts = () => {
+export const useGetParkings = () => {
   return useQuery({
-    queryKey: ["products"],
-    queryFn: getProducts,
+    queryKey: ["parkings"],
+    queryFn: getParkings,
   });
 };
 
-export const useCreateProduct = () => {
+export const useCreateParking = () => {
   const client = useQueryClient();
   return useMutation({
-    mutationKey: ["product", "create"],
-    mutationFn: createItem,
+    mutationKey: ["parking", "create"],
+    mutationFn: createParking,
     onSuccess: () => {
-      toast.success("New item is created successfully");
-      client.invalidateQueries(["products"]);
+      toast.success("New parking is created successfully");
+      client.invalidateQueries(["parkings"]);
     },
     onError: (err: any) => {
       toast.error(err.message);
@@ -37,7 +37,7 @@ export const useDeleteProduct = () => {
     mutationFn: deleteItem,
     onSuccess: () => {
       toast.success("Product is deleted successfully");
-      client.invalidateQueries(["products"]);
+      client.invalidateQueries(["parkings"]);
     },
     onError: (err: any) => {
       toast.error(err.message);
@@ -60,7 +60,7 @@ export const useNewItemEntry = () => {
     mutationFn: newItemEntry,
     onSuccess: (res) => {
       toast.success("Product is updated successfully");
-      client.invalidateQueries(["products"]);
+      client.invalidateQueries(["parkings"]);
       client.invalidateQueries(["product", res?.data.id]);
     },
     onError: (err: any) => {

@@ -1,17 +1,22 @@
+import { IVehicleType } from "../configuration/vehicleType/index.types";
+
 export interface ProductListProps {
   isLoading: boolean;
-  products: IProduct[];
+  products: IParking[];
   deleteProduct: (id: string) => void;
   viewProductById: (id: string) => void;
   navigateToEntryProduct: (id: string) => void;
 }
 
-export interface IProduct {
+export interface IParking {
   id?: string;
-  availableQty: number;
-  description: string;
-  itemCategoryId: string;
-  itemName: string;
+  name: string;
+  phone: string;
+  address?: string;
+  license: string;
+  vehicleType: IVehicleType;
+  entryTime: Date;
+  exitTime: Date;
 }
 type StateType = "view" | "add" | "edit";
 export interface IBaseStoreProps {

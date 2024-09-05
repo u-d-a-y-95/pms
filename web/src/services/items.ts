@@ -1,11 +1,10 @@
-import { IProduct } from "../components/pageComponent/main/products/index.types";
 import { http } from "../utils/http";
 
-export const getProducts = () => {
-  return http.get(`/item`);
+export const getParkings = () => {
+  return http.get(`/parking`);
 };
-export const createItem = (item: IProduct) => {
-  return http.post("/item", item);
+export const createParking = (item: IProduct) => {
+  return http.post("/parking", item);
 };
 
 export const deleteItem = (id: string) => {

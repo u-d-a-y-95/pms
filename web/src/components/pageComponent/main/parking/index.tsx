@@ -3,7 +3,7 @@ import { IconFilter, IconPlus } from "@tabler/icons-react";
 import { useNavigate } from "react-router-dom";
 import {
   useDeleteProduct,
-  useGetProducts,
+  useGetParkings,
 } from "../../../../hooks/apis/main/products";
 import { IProduct } from "./index.types";
 import { ParkingList } from "./parkingList";
@@ -11,7 +11,7 @@ import { ParkingList } from "./parkingList";
 export default function Parking() {
   const navigate = useNavigate();
 
-  const { data: res, isLoading, isFetching } = useGetProducts();
+  const { data: res, isLoading, isFetching } = useGetParkings();
   const { mutate: deleteMutate } = useDeleteProduct();
 
   const deleteProduct = (id: string) => {
@@ -32,7 +32,7 @@ export default function Parking() {
       <div className="flex justify-between">
         <Title order={3}>Parkings</Title>
         <div className="flex gap-4">
-          {/* <Button
+          <Button
             leftSection={<IconPlus size={"1rem"} />}
             color="gray"
             variant="light"
@@ -46,7 +46,7 @@ export default function Parking() {
             variant="light"
           >
             Filter
-          </Button> */}
+          </Button>
         </div>
       </div>
       <ParkingList
