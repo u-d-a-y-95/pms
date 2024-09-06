@@ -5,7 +5,7 @@ export const getParkings = (date: string) => {
   if (date) path += `?date=${date}`;
   return http.get(path);
 };
-export const createParking = (item) => {
+export const createParking = (item: any) => {
   return http.post("/parking", item);
 };
 export const checkoutParking = (id: string) => {

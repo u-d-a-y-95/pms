@@ -1,4 +1,4 @@
-import { IVehicleType } from "../configuration/vehicleType/index.types";
+import { VehicleType } from "../configuration/vehicleType/index.types";
 
 export interface ParkingsListProps {
   isLoading: boolean;
@@ -13,7 +13,7 @@ export interface IParking {
   phone: string;
   address?: string;
   license: string;
-  vehicleType: IVehicleType;
+  vehicleType: VehicleType;
   entryTime: Date;
   exitTime: Date;
   charge?: number;

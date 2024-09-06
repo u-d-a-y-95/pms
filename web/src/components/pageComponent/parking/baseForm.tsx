@@ -13,7 +13,7 @@ export const ParkingBaseForm = ({ form, state }: IBaseStoreProps) => {
       label: item.name,
     })) || [];
   const spaces =
-    spaceRes?.data?.map((item) => ({
+    spaceRes?.data?.map((item: { id: string; name: string }) => ({
       ...item,
       value: item.id,
       label: item.name,

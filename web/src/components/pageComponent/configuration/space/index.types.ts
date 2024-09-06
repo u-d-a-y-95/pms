@@ -1,4 +1,4 @@
-import { IVehicleType } from "../vehicleType/index.types";
+import { VehicleType } from "../vehicleType/index.types";
 
 export interface StoreListProps {
   isLoading: boolean;
@@ -9,7 +9,7 @@ export interface StoreListProps {
 
 export type Capacity = {
   count: number;
-  vehicleType: IVehicleType;
+  vehicleType: VehicleType;
 };
 
 export interface ISpace {

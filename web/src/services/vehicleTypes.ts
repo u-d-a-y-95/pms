@@ -1,10 +1,10 @@
-import { IVehicleType } from "../components/pageComponent/configuration/vehicleType/index.types";
+import { VehicleType } from "../components/pageComponent/configuration/vehicleType/index.types";
 import { http } from "../utils/http";
 
 export const getVehicleTypes = () => {
   return http.get(`/types`);
 };
-export const createVehicleTypes = (types: IVehicleType) => {
+export const createVehicleTypes = (types: VehicleType) => {
   return http.post("/types", types);
 };
 
