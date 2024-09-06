@@ -2,22 +2,19 @@ import { UseFormReturnType } from "@mantine/form";
 
 export type VehicleTypeListProps = {
   isLoading: boolean;
-  vehicleTypes: IVehicleType[];
-  deleteCategory: (id: string) => void;
-  viewCategoryById: (id: string) => void;
+  vehicleTypes: VehicleType[];
+  deleteVehicleType: (id: string) => void;
+  viewVacationTypeById: (id: string) => void;
 };
 
-export interface IVehicleType {
+export type VehicleType = {
   id?: string;
   name: string;
   charge: number;
   description?: string;
-}
+};
 type StateType = "view" | "add" | "edit";
 export interface IBaseStoreProps {
   state: StateType;
-  form?: UseFormReturnType<
-    IVehicleType,
-    (values: IVehicleType) => IVehicleType
-  >;
+  form?: UseFormReturnType<VehicleType, (values: VehicleType) => VehicleType>;
 }

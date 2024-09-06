@@ -1,42 +1,22 @@
-import {
-  ActionIcon,
-  LoadingOverlay,
-  Table,
-  Text,
-  Tooltip,
-} from "@mantine/core";
-
+import { LoadingOverlay, Table } from "@mantine/core";
 import { IconEye, IconTrash } from "@tabler/icons-react";
-import { FC, ReactNode } from "react";
-import { modals } from "@mantine/modals";
 import { ISpace, StoreListProps } from "./index.types";
+import { ActionBtn } from "../../../base/actionBtn";
+import { confirmationModal } from "../../../base/confirmationModal";
 
 const { Thead, Tbody, Tr, Th, Td } = Table;
 
-export const SpaceList: FC<StoreListProps> = ({
+export const SpaceList = ({
   spaces,
   isLoading,
   viewStoreById,
   deleteStore,
 }: StoreListProps) => {
   const deleteConformation = (id: string) => {
-    modals.openConfirmModal({
-      title: "Confirmation",
-      children: (
-        <Text size="sm">
-          Are you sure you want to delete this space? This action can not be
-          undone
-        </Text>
-      ),
-      centered: true,
-      cancelProps: {
-        size: "xs",
-        variant: "subtle",
-      },
-      labels: { confirm: "Yes", cancel: "No" },
-      confirmProps: { color: "red" },
-      onCancel: () => console.log("Cancel"),
-      onConfirm: () => deleteStore(id),
+    confirmationModal({
+      label:
+        "Are you sure you want to delete this space? This action can not be undone",
+      confirmHandler: () => deleteStore(id),
     });
   };
 
@@ -94,29 +74,5 @@ export const SpaceList: FC<StoreListProps> = ({
         </Table>
       </div>
     </>
-  );
-};
-interface ActionBtnProps {
-  label: string;
-  clickHandler: () => void;
-  Icon: ReactNode;
-}
-const ActionBtn: FC<ActionBtnProps> = ({
-  label,
-  clickHandler,
-  Icon,
-}: ActionBtnProps) => {
-  return (
-    <Tooltip label={label} variant="light" color="gray" withArrow>
-      <ActionIcon
-        size={"sm"}
-        onClick={clickHandler}
-        variant="outline"
-        p="3"
-        color="gray"
-      >
-        {Icon}
-      </ActionIcon>
-    </Tooltip>
   );
 };

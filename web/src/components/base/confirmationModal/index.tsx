@@ -1,13 +1,11 @@
 import { Text } from "@mantine/core";
 import { modals } from "@mantine/modals";
+import { confirmationModalProps } from "./index.type";
 
-export const DeleteConfirmationModal = ({
+export const confirmationModal = ({
+  confirmHandler,
   label,
-  confirmHandller,
-}: {
-  label: string;
-  confirmHandller: any;
-}) => {
+}: confirmationModalProps) => {
   modals.openConfirmModal({
     title: "Confirmation",
     children: <Text size="sm">{label}</Text>,
@@ -18,6 +16,7 @@ export const DeleteConfirmationModal = ({
     },
     labels: { confirm: "Yes", cancel: "No" },
     confirmProps: { color: "red" },
-    onConfirm: () => confirmHandller,
+    onCancel: () => console.log("Cancel"),
+    onConfirm: confirmHandler,
   });
 };

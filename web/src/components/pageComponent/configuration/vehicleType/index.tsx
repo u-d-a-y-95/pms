@@ -12,11 +12,11 @@ export const VehicleType = () => {
   const { data: res, isLoading, isFetching } = useGetVehicleTypes();
   const { mutate: deleteMutate } = useDeleteVehicleType();
 
-  const deleteCategory = (id: string) => {
+  const deleteVehicleType = (id: string) => {
     deleteMutate(id);
   };
 
-  const viewCategoryById = (id: string) => {
+  const viewVehicleById = (id: string) => {
     navigate(`./view/${id}`);
   };
 
@@ -28,8 +28,8 @@ export const VehicleType = () => {
       <VehicleTypeList
         vehicleTypes={vehicleTypes}
         isLoading={isLoading || isFetching}
-        deleteCategory={deleteCategory}
-        viewCategoryById={viewCategoryById}
+        deleteVehicleType={deleteVehicleType}
+        viewVacationTypeById={viewVehicleById}
       />
     </>
   );

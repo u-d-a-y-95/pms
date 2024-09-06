@@ -1,34 +1,22 @@
-import { LoadingOverlay, Table, Text } from "@mantine/core";
+import { LoadingOverlay, Table } from "@mantine/core";
 import { IconEye, IconTrash } from "@tabler/icons-react";
-import { modals } from "@mantine/modals";
-import { VehicleTypeListProps, IVehicleType } from "./index.types";
+import { VehicleType, VehicleTypeListProps } from "./index.types";
 import { ActionBtn } from "../../../base/actionBtn";
+import { confirmationModal } from "../../../base/confirmationModal";
 
 const { Thead, Tbody, Tr, Th, Td } = Table;
 
 export const VehicleTypeList = ({
   vehicleTypes,
   isLoading,
-  viewCategoryById,
-  deleteCategory,
+  viewVacationTypeById,
+  deleteVehicleType,
 }: VehicleTypeListProps) => {
   const deleteConformation = (id: string) => {
-    modals.openConfirmModal({
-      title: "Confirmation",
-      children: (
-        <Text size="sm">
-          Are you sure you want to delete this vehicle types ? This action can
-          not be undone
-        </Text>
-      ),
-      centered: true,
-      cancelProps: {
-        size: "xs",
-        variant: "subtle",
-      },
-      labels: { confirm: "Yes", cancel: "No" },
-      confirmProps: { color: "red" },
-      onConfirm: () => deleteCategory(id),
+    confirmationModal({
+      label:
+        "Are you sure you want to delete this vehicle types ? This action can not be undone",
+      confirmHandler: () => deleteVehicleType(id),
     });
   };
 
@@ -55,7 +43,7 @@ export const VehicleTypeList = ({
           <Tbody>
             {vehicleTypes?.map(
               (
-                { id = "", name, charge, description }: IVehicleType,
+                { id = "", name, charge, description }: VehicleType,
                 index: number
               ) => (
                 <Tr key={id}>
@@ -68,7 +56,7 @@ export const VehicleTypeList = ({
                       <ActionBtn
                         label="View"
                         clickHandler={() => {
-                          viewCategoryById(id);
+                          viewVacationTypeById(id);
                         }}
                         Icon={<IconEye />}
                       />
