@@ -2,9 +2,9 @@ import { Button, Title } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
 import { useNavigate } from "react-router-dom";
 import { VehicleTypeBaseForm } from "./baseForm";
-import { IVehicleType } from "./index.types";
 import { schema, vehicleInitialValue } from "./utils";
 import { useCreateVehicleType } from "../../../../hooks/apis/configuration/vehicleType";
+import { VehicleType } from "./index.types";
 
 export const AddVehicleType = () => {
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ export const AddVehicleType = () => {
 
   const { mutateAsync: createMutation } = useCreateVehicleType();
 
-  const save = async (values: IVehicleType) => {
+  const save = async (values: VehicleType) => {
     const res = await createMutation(values);
     if ([200, 201].includes(res.status)) {
       form.reset();
@@ -31,7 +31,7 @@ export const AddVehicleType = () => {
       </Title>
       <form
         className="mt-5"
-        onSubmit={form.onSubmit((v: IVehicleType) => save(v))}
+        onSubmit={form.onSubmit((v: VehicleType) => save(v))}
         onReset={form.onReset}
       >
         <VehicleTypeBaseForm form={form} state="add" />

@@ -6,26 +6,20 @@ import { Column, Entity, OneToMany } from 'typeorm';
 
 @Entity('types')
 export class TypeEntity extends BaseEntity {
-  @Column({
-    unique: true,
-  })
+  @Column({ unique: true })
   @ApiProperty()
   name: string;
 
-  @Column({
-    nullable: true,
-  })
+  @Column({ nullable: true })
   @ApiProperty()
   description: string;
 
-  @Column({
-    nullable: true,
-  })
+  @Column({ nullable: true })
   @ApiProperty()
   charge: number;
 
-  @OneToMany(() => CapacityEntity, (size) => size.vehicleType, { eager: false })
-  capacites: CapacityEntity[];
+  @OneToMany(() => CapacityEntity, (capacity) => capacity.vehicleType)
+  capacities: CapacityEntity[];
 
   @OneToMany(() => ParkingEntity, (parking) => parking.vehicleType)
   parkings: ParkingEntity[];

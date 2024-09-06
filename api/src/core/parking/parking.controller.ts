@@ -11,7 +11,7 @@ import {
 import { ParkingService } from './parking.service';
 import { CreateParkingDto } from './dto/create-parking.dto';
 import { UpdateParkingDto } from './dto/update-parking.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiQuery, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Parking')
 @Controller('parking')
@@ -20,19 +20,16 @@ export class ParkingController {
 
   @Post()
   create(@Body() createParkingDto: CreateParkingDto) {
-    return this.parkingService.create(createParkingDto);
+    return this.parkingService.create({
+      ...createParkingDto,
+      entryTime: new Date(),
+    });
   }
 
   @Get()
-  findAll(@Query('date') date: string) {
-    console.log(date);
-    return this.parkingService.find({
-      ...(date && {
-        where: {
-          entryTime: new Date(date),
-        },
-      }),
-    });
+  @ApiQuery({ name: 'date', required: false })
+  findAll(@Query('date') date?: string) {
+    return this.parkingService.getAll(date);
   }
 
   @Get(':id')
@@ -43,6 +40,11 @@ export class ParkingController {
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateParkingDto: UpdateParkingDto) {
     return this.parkingService.updateById(id, updateParkingDto);
+  }
+
+  @Patch(':id/checkout')
+  checkoutByID(@Param('id') id: string) {
+    return this.parkingService.checkoutById(id);
   }
 
   @Delete(':id')

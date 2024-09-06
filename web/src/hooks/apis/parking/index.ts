@@ -1,17 +1,16 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
+  checkoutParking,
   createParking,
-  deleteItem,
+  deleteParkingById,
   getParkings,
-  getProductById,
-  newItemEntry,
-} from "../../../services/items";
+} from "../../../services/parkings";
 import { toast } from "../../../utils/toast";
 
-export const useGetParkings = () => {
+export const useGetParkings = (date?: string) => {
   return useQuery({
-    queryKey: ["parkings"],
-    queryFn: getParkings,
+    queryKey: ["parkings", date],
+    queryFn: () => getParkings(date || ""),
   });
 };
 
@@ -30,13 +29,13 @@ export const useCreateParking = () => {
   });
 };
 
-export const useDeleteProduct = () => {
+export const useCheckoutById = () => {
   const client = useQueryClient();
   return useMutation({
-    mutationKey: ["product", "delete"],
-    mutationFn: deleteItem,
+    mutationKey: ["parking", "checkout"],
+    mutationFn: checkoutParking,
     onSuccess: () => {
-      toast.success("Product is deleted successfully");
+      toast.success("Checkout is done successfully");
       client.invalidateQueries(["parkings"]);
     },
     onError: (err: any) => {
@@ -45,10 +44,17 @@ export const useDeleteProduct = () => {
   });
 };
 
-export const useGetProductById = (id: string | null) => {
-  return useQuery({
-    queryKey: ["product", id],
-    queryFn: getProductById,
-    enabled: !!id,
+export const useDeleteParking = () => {
+  const client = useQueryClient();
+  return useMutation({
+    mutationKey: ["parkings", "delete"],
+    mutationFn: deleteParkingById,
+    onSuccess: () => {
+      toast.success("A item is deleted successfully");
+      client.invalidateQueries(["parkings"]);
+    },
+    onError: (err: any) => {
+      toast.error(err.message);
+    },
   });
 };

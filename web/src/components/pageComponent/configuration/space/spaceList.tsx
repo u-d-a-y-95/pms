@@ -41,13 +41,12 @@ export const SpaceList = ({
           </Thead>
           <Tbody>
             {spaces?.map(
-              ({ id = "", name, capacites }: ISpace, index: number) => (
+              ({ id = "", name, capacities }: ISpace, index: number) => (
                 <Tr key={id}>
                   <Td>{index + 1}</Td>
                   <Td>{name}</Td>
                   <Td>
-                    {capacites
-                      .flat()
+                    {capacities
                       .map((item) => `${item.count} ${item.vehicleType.name} `)
                       .join(" ,")}
                   </Td>

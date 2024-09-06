@@ -16,7 +16,11 @@ export class SpacesController {
 
   @Get()
   findAll() {
-    return this.spacesService.find();
+    return this.spacesService.find({
+      relations: {
+        capacities: { vehicleType: true },
+      },
+    });
   }
 
   @Get(':id')

@@ -25,8 +25,7 @@ export class SpacesService extends BaseService<SpaceEntity> {
         return size;
       });
 
-      space.capacites = bulkCapacity;
-      console.log(space);
+      space.capacities = bulkCapacity;
       return await this.spaceRepository.save(space);
     } catch (error) {
       console.log(error);

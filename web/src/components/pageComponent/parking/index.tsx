@@ -1,57 +1,34 @@
-import { Button, Title } from "@mantine/core";
-import { IconFilter, IconPlus } from "@tabler/icons-react";
-import { useNavigate } from "react-router-dom";
-
 import { ParkingList } from "./parkingList";
-import { useDeleteProduct, useGetParkings } from "../../../hooks/apis/parking";
+import {
+  useCheckoutById,
+  useDeleteParking,
+  useGetParkings,
+} from "../../../hooks/apis/parking";
+import { PageHeader } from "../../base/pageHeader";
+import { IParking } from "./index.types";
 
 export default function Parking() {
-  const navigate = useNavigate();
-
   const { data: res, isLoading, isFetching } = useGetParkings();
-  const { mutate: deleteMutate } = useDeleteProduct();
+  const { mutate: deleteMutate } = useDeleteParking();
+  const { mutate: checkoutMutate } = useCheckoutById();
 
-  const deleteProduct = (id: string) => {
+  const deleteParking = (id: string) => {
     deleteMutate(id);
   };
-
-  const viewProductById = (id: string) => {
-    navigate(`./view/${id}`);
-  };
-  const navigateToEntryProduct = (id: string) => {
-    navigate(`./entry/${id}`);
+  const checkoutParking = (id: string) => {
+    checkoutMutate(id);
   };
 
-  const products: IProduct[] = res?.data;
+  const parkings: IParking[] = res?.data || [];
 
   return (
     <>
-      <div className="flex justify-between">
-        <Title order={3}>Parkings</Title>
-        <div className="flex gap-4">
-          <Button
-            leftSection={<IconPlus size={"1rem"} />}
-            color="gray"
-            variant="light"
-            onClick={() => navigate("./add")}
-          >
-            Add
-          </Button>
-          <Button
-            leftSection={<IconFilter size={"1rem"} />}
-            color="gray"
-            variant="light"
-          >
-            Filter
-          </Button>
-        </div>
-      </div>
+      <PageHeader title="Parkings" addBtnPath="./add" />
       <ParkingList
-        products={products}
+        parkings={parkings}
         isLoading={isLoading || isFetching}
-        deleteProduct={deleteProduct}
-        viewProductById={viewProductById}
-        navigateToEntryProduct={navigateToEntryProduct}
+        deleteParking={deleteParking}
+        checkoutParking={checkoutParking}
       />
     </>
   );

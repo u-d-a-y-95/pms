@@ -22,7 +22,6 @@ export const AppRoutes = () => {
         </Route>
         <Route path="parking">
           <Route path="add" Component={ParkingPage.Add}></Route>
-          <Route path="view/:id" Component={ParkingPage.View}></Route>
           <Route path="" Component={ParkingPage}></Route>
         </Route>
         <Route path="" Component={DashboardPage}></Route>

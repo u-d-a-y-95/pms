@@ -29,6 +29,9 @@ class Http {
   put(path: string, body: any, option?: any) {
     return axios.put<any, IResponse>(path, body, option);
   }
+  patch(path: string, body: any, option?: any) {
+    return axios.patch<any, IResponse>(path, body, option);
+  }
   get(path: string, option?: any) {
     return axios.get<any, IResponse>(path, option);
   }

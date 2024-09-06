@@ -1,43 +1,31 @@
-import {
-  ActionIcon,
-  LoadingOverlay,
-  Table,
-  Text,
-  Tooltip,
-} from "@mantine/core";
-import { IconCubePlus, IconEye, IconTrash } from "@tabler/icons-react";
+import { ActionIcon, LoadingOverlay, Table, Tooltip } from "@mantine/core";
+import { IconBrowserCheck, IconTrash } from "@tabler/icons-react";
 import { FC, ReactNode } from "react";
-import { modals } from "@mantine/modals";
-import { IParking, ProductListProps } from "./index.types";
+import { IParking, ParkingsListProps } from "./index.types";
 import dayjs from "dayjs";
+import { confirmationModal } from "../../base/confirmationModal";
 
 const { Thead, Tbody, Tr, Th, Td } = Table;
 
-export const ParkingList: FC<ProductListProps> = ({
-  products,
+export const ParkingList = ({
+  parkings,
   isLoading,
-  viewProductById,
-  deleteProduct,
-  navigateToEntryProduct,
-}: ProductListProps) => {
+  checkoutParking,
+  deleteParking,
+}: ParkingsListProps) => {
   const deleteConformation = (id: string) => {
-    modals.openConfirmModal({
-      title: "Confirmation",
-      children: (
-        <Text size="sm">
-          Are you sure you want to delete this product? This action can not be
-          undone
-        </Text>
-      ),
-      centered: true,
-      cancelProps: {
-        size: "xs",
-        variant: "subtle",
-      },
-      labels: { confirm: "Yes", cancel: "No" },
-      confirmProps: { color: "red" },
-      onCancel: () => console.log("Cancel"),
-      onConfirm: () => deleteProduct(id),
+    confirmationModal({
+      label:
+        "Are you sure you want to delete this? This action can not be undone",
+      confirmHandler: () => deleteParking(id),
+    });
+  };
+
+  const checkoutConformation = (id: string) => {
+    confirmationModal({
+      label:
+        "Are you sure you want to checkout this? This action can not be undone",
+      confirmHandler: () => checkoutParking(id),
     });
   };
 
@@ -67,7 +55,7 @@ export const ParkingList: FC<ProductListProps> = ({
             </Tr>
           </Thead>
           <Tbody>
-            {products?.map(
+            {parkings?.map(
               (
                 {
                   id = "",
@@ -78,6 +66,7 @@ export const ParkingList: FC<ProductListProps> = ({
                   vehicleType,
                   entryTime,
                   exitTime,
+                  charge,
                 }: IParking,
                 index: number
               ) => (
@@ -92,22 +81,14 @@ export const ParkingList: FC<ProductListProps> = ({
                   <Td>
                     {exitTime && dayjs(exitTime).format("MMM D, YYYY h:mm A")}
                   </Td>
-                  <Td></Td>
+                  <Td className=" text-right">{charge}</Td>
                   <Td style={{ width: "200px" }}>
                     <div className="flex justify-center gap-3">
                       <ActionBtn
-                        label="View"
-                        clickHandler={() => {
-                          viewProductById(id);
-                        }}
-                        Icon={<IconEye />}
-                      />
-                      <ActionBtn
-                        label="New Entry"
-                        clickHandler={() => {
-                          navigateToEntryProduct(id);
-                        }}
-                        Icon={<IconCubePlus />}
+                        label="checkout"
+                        clickHandler={() => checkoutConformation(id)}
+                        Icon={<IconBrowserCheck />}
+                        disabled={!!exitTime}
                       />
                       <ActionBtn
                         label="Delete"
@@ -129,11 +110,13 @@ interface ActionBtnProps {
   label: string;
   clickHandler: () => void;
   Icon: ReactNode;
+  disabled?: boolean;
 }
 const ActionBtn: FC<ActionBtnProps> = ({
   label,
   clickHandler,
   Icon,
+  disabled = false,
 }: ActionBtnProps) => {
   return (
     <Tooltip label={label} variant="light" color="gray" withArrow>
@@ -143,6 +126,7 @@ const ActionBtn: FC<ActionBtnProps> = ({
         variant="outline"
         p="3"
         color="gray"
+        disabled={disabled}
       >
         {Icon}
       </ActionIcon>

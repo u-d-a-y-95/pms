@@ -5,7 +5,7 @@ import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 
 @Entity('parking')
 export class ParkingEntity extends BaseEntity {
-  @Column({})
+  @Column()
   name: string;
 
   @Column({ nullable: true })
@@ -26,14 +26,14 @@ export class ParkingEntity extends BaseEntity {
   @Column({ nullable: true })
   charge: number;
 
-  @ManyToOne(() => SpaceEntity, (space) => space.parkings, { eager: true })
+  @ManyToOne(() => SpaceEntity, (space) => space.parkings)
   @JoinColumn()
   space: SpaceEntity;
 
   @Column()
   spaceId: string;
 
-  @ManyToOne(() => TypeEntity, (type) => type.parkings, { eager: true })
+  @ManyToOne(() => TypeEntity, (type) => type.parkings)
   @JoinColumn()
   vehicleType: TypeEntity;
 

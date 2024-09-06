@@ -15,7 +15,7 @@ export type Capacity = {
 export interface ISpace {
   id?: string;
   name: string;
-  capacites: Capacity[];
+  capacities: Capacity[];
 }
 type StateType = "view" | "add" | "edit";
 export interface IBaseStoreProps {

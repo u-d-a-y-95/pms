@@ -5,14 +5,13 @@ import { ParkingEntity } from 'src/core/parking/entities/parking.entity';
 
 @Entity('spaces')
 export class SpaceEntity extends BaseEntity {
-  @Column({})
+  @Column()
   name: string;
 
   @OneToMany(() => CapacityEntity, (capacity) => capacity.space, {
-    eager: true,
     cascade: true,
   })
-  capacites: CapacityEntity[];
+  capacities: CapacityEntity[];
 
   @OneToMany(() => ParkingEntity, (parking) => parking.space)
   parkings: ParkingEntity[];

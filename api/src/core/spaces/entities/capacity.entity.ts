@@ -8,7 +8,7 @@ export class CapacityEntity extends BaseEntity {
   @Column()
   count: number;
 
-  @ManyToOne(() => SpaceEntity, (space) => space.capacites, {
+  @ManyToOne(() => SpaceEntity, (space) => space.capacities, {
     onDelete: 'CASCADE',
   })
   @JoinColumn()
@@ -17,7 +17,7 @@ export class CapacityEntity extends BaseEntity {
   @Column()
   spaceId: string;
 
-  @ManyToOne(() => TypeEntity, (types) => types.capacites, { eager: true })
+  @ManyToOne(() => TypeEntity, (type) => type.capacities)
   @JoinColumn()
   vehicleType: TypeEntity;
 

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useGetSpaces } from "../../../hooks/apis/configuration/space";
 import { useGetVehicleTypes } from "../../../hooks/apis/configuration/vehicleType";
 import { useGetParkings } from "../../../hooks/apis/parking";
@@ -5,13 +6,14 @@ import { PlainCard } from "../../base/card/card";
 import { PieChart } from "@mantine/charts";
 
 export default function Dashboard() {
+  const [date] = useState(new Date());
   const { data: vehicleRes } = useGetVehicleTypes();
-  const { data: parkingRes } = useGetParkings();
+  const { data: parkingRes } = useGetParkings(date.toISOString());
   const { data: spaceRes } = useGetSpaces();
 
-  const totalParked = parkingRes?.data?.length;
+  const totalParked = parkingRes?.data?.filter((item) => !item.exitTime).length;
   const totalSpace = spaceRes?.data?.reduce(
-    (acc, item) => item.capacites.reduce((c, i) => c + i.count, 0),
+    (acc, item) => item.capacities.reduce((c, i) => c + i.count, 0),
     0
   );
 
@@ -22,7 +24,7 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <PlainCard
           label={"Total Parked"}
-          value={totalParked || ""}
+          value={totalParked || 0}
           bg="#d5eef6"
         />
         <PlainCard

@@ -1,11 +1,10 @@
 import { IVehicleType } from "../configuration/vehicleType/index.types";
 
-export interface ProductListProps {
+export interface ParkingsListProps {
   isLoading: boolean;
-  products: IParking[];
-  deleteProduct: (id: string) => void;
-  viewProductById: (id: string) => void;
-  navigateToEntryProduct: (id: string) => void;
+  parkings: IParking[];
+  deleteParking: (id: string) => void;
+  checkoutParking: (id: string) => void;
 }
 
 export interface IParking {
@@ -17,6 +16,7 @@ export interface IParking {
   vehicleType: IVehicleType;
   entryTime: Date;
   exitTime: Date;
+  charge?: number;
 }
 type StateType = "view" | "add" | "edit";
 export interface IBaseStoreProps {
