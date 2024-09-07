@@ -1,8 +1,8 @@
+import { GetParkingsQuery } from "../hooks/apis/parking/index.type";
 import { http } from "../utils/http";
 
-export const getParkings = (date: string) => {
-  let path = "/parking";
-  if (date) path += `?date=${date}`;
+export const getParkings = (query: GetParkingsQuery) => {
+  const path = `/parking?${new URLSearchParams(query)}`;
   return http.get(path);
 };
 export const createParking = (item: any) => {

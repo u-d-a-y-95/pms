@@ -3,7 +3,6 @@ import {
   createSpace,
   deleteSpaceById,
   getSpaces,
-  getStoreById,
   updateEmployee,
 } from "../../../services/spaces";
 import { toast } from "../../../utils/toast";
@@ -58,13 +57,5 @@ export const useDeleteSpace = () => {
     onError: (err: any) => {
       toast.error(err.message);
     },
-  });
-};
-
-export const useGetStoreById = (id: string | null) => {
-  return useQuery({
-    queryKey: ["store", id],
-    queryFn: getStoreById,
-    enabled: !!id,
   });
 };

@@ -12,6 +12,7 @@ import { ParkingService } from './parking.service';
 import { CreateParkingDto } from './dto/create-parking.dto';
 import { UpdateParkingDto } from './dto/update-parking.dto';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
+import { GetParkingQueryDto } from './dto/get-parking.dto';
 
 @ApiTags('Parking')
 @Controller('parking')
@@ -27,9 +28,8 @@ export class ParkingController {
   }
 
   @Get()
-  @ApiQuery({ name: 'date', required: false })
-  findAll(@Query('date') date?: string) {
-    return this.parkingService.getAll(date);
+  findAll(@Query() getParkingQueryDto: GetParkingQueryDto) {
+    return this.parkingService.getParkings(getParkingQueryDto);
   }
 
   @Get(':id')

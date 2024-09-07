@@ -6,11 +6,12 @@ import {
   getParkings,
 } from "../../../services/parkings";
 import { toast } from "../../../utils/toast";
+import { GetParkingsQuery } from "./index.type";
 
-export const useGetParkings = (date?: string) => {
+export const useGetParkings = (query: GetParkingsQuery) => {
   return useQuery({
-    queryKey: ["parkings", date],
-    queryFn: () => getParkings(date || ""),
+    queryKey: ["parkings", query],
+    queryFn: () => getParkings(query),
   });
 };
 

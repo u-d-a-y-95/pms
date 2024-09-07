@@ -2,7 +2,14 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { BaseService } from 'src/shared/service/base.service';
 import { ParkingEntity } from './entities/parking.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Between, Repository } from 'typeorm';
+import {
+  Between,
+  IsNull,
+  LessThanOrEqual,
+  MoreThanOrEqual,
+  Repository,
+} from 'typeorm';
+import { GetParkingQueryDto } from './dto/get-parking.dto';
 
 @Injectable()
 export class ParkingService extends BaseService<ParkingEntity> {
@@ -36,6 +43,43 @@ export class ParkingService extends BaseService<ParkingEntity> {
     }
 
     return this.parkingRepository.find({
+      relations: {
+        space: true,
+        vehicleType: true,
+      },
+    });
+  }
+
+  private buildWhereClause(getParkingQueryDto: GetParkingQueryDto) {
+    const {
+      startDate = '',
+      endDate = '',
+      currentlyParked = false,
+    } = getParkingQueryDto;
+    const where = {};
+    if (startDate && endDate) {
+      where['entryTime'] = Between(
+        new Date(getParkingQueryDto.startDate),
+        new Date(getParkingQueryDto.endDate),
+      );
+    } else if (startDate && !endDate) {
+      where['entryTime'] = MoreThanOrEqual(
+        new Date(getParkingQueryDto.startDate),
+      );
+    } else if (!startDate && endDate) {
+      where['entryTime'] = LessThanOrEqual(
+        new Date(getParkingQueryDto.endDate),
+      );
+    }
+    if (currentlyParked) {
+      where['exitTime'] = IsNull();
+    }
+    return where;
+  }
+  async getParkings(getParkingQueryDto: GetParkingQueryDto) {
+    const where = this.buildWhereClause(getParkingQueryDto);
+    return this.parkingRepository.find({
+      where: where,
       relations: {
         space: true,
         vehicleType: true,
