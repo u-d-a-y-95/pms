@@ -13,7 +13,7 @@ export default function Dashboard() {
 
   const totalParked = parkingRes?.data?.filter((item) => !item.exitTime).length;
   const totalSpace = spaceRes?.data?.reduce(
-    (acc, item) => item.capacities.reduce((c, i) => c + i.count, 0),
+    (acc, item) => acc + item.capacities.reduce((c, i) => c + i.count, 0),
     0
   );
 

@@ -25,7 +25,7 @@ export const Spaces = () => {
 
   return (
     <>
-      <PageHeader title="Spaces" addBtnPath="./add" />
+      <PageHeader title="Spaces" addBtnPath="" />
       <SpaceList
         spaces={spaces as ISpace[]}
         isLoading={isLoading || isFetching}

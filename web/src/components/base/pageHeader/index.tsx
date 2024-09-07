@@ -8,14 +8,17 @@ export const PageHeader = ({ title, addBtnPath }: PageHeaderProps) => {
   return (
     <div className="flex justify-between">
       <Title order={3}>{title}</Title>
+
       <div className="flex gap-4">
-        <Button
-          leftSection={<IconPlus size={"1rem"} />}
-          variant="light"
-          onClick={() => navigate(addBtnPath)}
-        >
-          Add
-        </Button>
+        {addBtnPath && (
+          <Button
+            leftSection={<IconPlus size={"1rem"} />}
+            variant="light"
+            onClick={() => navigate(addBtnPath)}
+          >
+            Add
+          </Button>
+        )}
       </div>
     </div>
   );
