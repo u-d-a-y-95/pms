@@ -1,6 +1,7 @@
 import { VehicleType } from "../configuration/vehicleType/index.types";
 
 export interface ParkingsListProps {
+  loading: boolean;
   parkings: IParking[];
   deleteParking: (id: string) => void;
   checkoutParking: (id: string) => void;

@@ -1,23 +1,23 @@
 import { Select, Textarea, TextInput } from "@mantine/core";
 import { IBaseStoreProps } from "./index.types";
-import { useGetVehicleTypes } from "../../../hooks/apis/configuration/vehicleType";
 import { useGetSpaces } from "../../../hooks/apis/configuration/space";
 
 export const ParkingBaseForm = ({ form, state }: IBaseStoreProps) => {
-  const { data: vehicleRes } = useGetVehicleTypes();
   const { data: spaceRes } = useGetSpaces();
-  const vehicleTypes =
-    vehicleRes?.data?.map((item) => ({
-      ...item,
-      value: item.id,
-      label: item.name,
-    })) || [];
   const spaces =
     spaceRes?.data?.map((item: { id: string; name: string }) => ({
       ...item,
       value: item.id,
       label: item.name,
     })) || [];
+
+  const vehicles = spaces?.reduce((acc, item) => {
+    acc[item.id] = item.capacities?.map((item) => ({
+      value: item.vehicleType.id,
+      label: item.vehicleType.name + ` - ${item.count}`,
+    }));
+    return acc;
+  }, {});
 
   return (
     <div className="flex flex-col gap-5">
@@ -44,25 +44,31 @@ export const ParkingBaseForm = ({ form, state }: IBaseStoreProps) => {
           disabled={state === "view"}
         />
         <Select
-          label="Vehicle Type"
-          placeholder="Plase enter vehicle type"
-          withAsterisk
-          {...form?.getInputProps("vehicleTypeId")}
-          data={vehicleTypes}
-          disabled={state === "view"}
-        />
-        <Select
           label="Space"
           placeholder="Plase enter space"
           withAsterisk
           {...form?.getInputProps("spaceId")}
           data={spaces}
           disabled={state === "view"}
+          nothingFoundMessage
+          onChange={(value) => {
+            form.setFieldValue("spaceId", value);
+            form.setFieldValue("vehicleTypeId", null);
+          }}
+        />
+        <Select
+          label="Vehicle Type"
+          placeholder="Plase enter vehicle type"
+          withAsterisk
+          {...form?.getInputProps("vehicleTypeId")}
+          data={vehicles[form.getValues().spaceId] || []}
+          disabled={state === "view" || !form.getValues().spaceId}
         />
       </div>
       <div className="grid grid-cols-3  gap-5">
         <Textarea
           label="Address"
+          withAsterisk
           placeholder="Plase enter address"
           {...form?.getInputProps("address")}
           disabled={state === "view"}

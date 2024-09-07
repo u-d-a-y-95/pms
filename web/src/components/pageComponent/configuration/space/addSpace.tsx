@@ -1,4 +1,4 @@
-import { Button, Title } from "@mantine/core";
+import { Button, LoadingOverlay, Title } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
 import { useNavigate } from "react-router-dom";
 import { SpaceBaseForm } from "./baseForm";
@@ -10,6 +10,7 @@ import { toast } from "../../../../utils/toast";
 
 export const AddSpace = () => {
   const navigate = useNavigate();
+
   const [items, setItems] = useState([]);
 
   const form = useForm({
@@ -18,9 +19,10 @@ export const AddSpace = () => {
     validate: zodResolver(schema),
   });
 
-  const { mutateAsync: createMutation } = useCreateSpace();
+  const { mutateAsync: createMutation, isLoading: createLoading } =
+    useCreateSpace();
 
-  const save = async (values: VehicleType) => {
+  const save = async (values) => {
     if (items.length < 1) {
       return toast.warning("Please add vehicle types");
     }
@@ -36,12 +38,17 @@ export const AddSpace = () => {
 
   return (
     <>
+      <LoadingOverlay
+        visible={createLoading}
+        zIndex={1000}
+        overlayProps={{ radius: "lg", blur: 2 }}
+      />
       <Title order={3} style={{ textTransform: "capitalize" }}>
         Add Space
       </Title>
       <form
         className="mt-5"
-        onSubmit={form.onSubmit((v: VehicleType) => save(v))}
+        onSubmit={form.onSubmit((v) => save(v))}
         onReset={(e) => {
           form.onReset(e);
           setItems([]);

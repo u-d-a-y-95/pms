@@ -1,4 +1,4 @@
-import { Table } from "@mantine/core";
+import { LoadingOverlay, Table } from "@mantine/core";
 import { IconEye, IconTrash } from "@tabler/icons-react";
 import { VehicleType, VehicleTypeListProps } from "./index.types";
 import { ActionBtn } from "../../../base/actionBtn";
@@ -7,6 +7,7 @@ import { confirmationModal } from "../../../base/confirmationModal";
 const { Thead, Tbody, Tr, Th, Td } = Table;
 
 export const VehicleTypeList = ({
+  loading,
   vehicleTypes,
   viewVacationTypeById,
   deleteVehicleType,
@@ -22,6 +23,11 @@ export const VehicleTypeList = ({
   return (
     <>
       <div className="mt-4">
+        <LoadingOverlay
+          visible={loading}
+          zIndex={1000}
+          overlayProps={{ radius: "lg", blur: 2 }}
+        />
         <Table striped withTableBorder withColumnBorders>
           <Thead>
             <Tr>

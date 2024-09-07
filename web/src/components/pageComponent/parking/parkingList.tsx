@@ -1,4 +1,4 @@
-import { ActionIcon, Table, Tooltip } from "@mantine/core";
+import { ActionIcon, LoadingOverlay, Table, Tooltip } from "@mantine/core";
 import { IconBrowserCheck, IconTrash } from "@tabler/icons-react";
 import { FC, ReactNode } from "react";
 import { IParking, ParkingsListProps } from "./index.types";
@@ -9,6 +9,7 @@ const { Thead, Tbody, Tr, Th, Td } = Table;
 
 export const ParkingList = ({
   parkings,
+  loading,
   checkoutParking,
   deleteParking,
 }: ParkingsListProps) => {
@@ -30,6 +31,11 @@ export const ParkingList = ({
 
   return (
     <>
+      <LoadingOverlay
+        visible={loading}
+        zIndex={1000}
+        overlayProps={{ radius: "lg", blur: 2 }}
+      />
       <div className="relative mt-4">
         <Table striped withTableBorder withColumnBorders>
           <Thead>

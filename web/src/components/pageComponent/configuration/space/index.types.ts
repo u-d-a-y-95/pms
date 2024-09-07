@@ -1,9 +1,9 @@
 import { VehicleType } from "../vehicleType/index.types";
 
 export interface SpaceListProps {
+  loading: boolean;
   spaces: ISpace[];
   deleteStore: (id: string) => void;
-  viewStoreById: (id: string) => void;
 }
 
 export type Capacity = {

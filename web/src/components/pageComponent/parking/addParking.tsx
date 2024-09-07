@@ -1,4 +1,4 @@
-import { Button, Title } from "@mantine/core";
+import { Button, LoadingOverlay, Title } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
 import { useNavigate } from "react-router-dom";
 import { ParkingBaseForm } from "./baseForm";
@@ -14,7 +14,8 @@ export const AddParking = () => {
     validate: zodResolver(schema),
   });
 
-  const { mutateAsync: createMutation } = useCreateParking();
+  const { mutateAsync: createMutation, isLoading: createLoading } =
+    useCreateParking();
 
   const save = async (values: IProduct) => {
     const res = await createMutation(values);
@@ -25,6 +26,11 @@ export const AddParking = () => {
 
   return (
     <>
+      <LoadingOverlay
+        visible={createLoading}
+        zIndex={1000}
+        overlayProps={{ radius: "lg", blur: 2 }}
+      />
       <Title order={3} style={{ textTransform: "capitalize" }}>
         Add Parking
       </Title>

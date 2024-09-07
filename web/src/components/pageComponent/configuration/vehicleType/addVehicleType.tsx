@@ -1,4 +1,4 @@
-import { Button, Title } from "@mantine/core";
+import { Button, LoadingOverlay, Title } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
 import { useNavigate } from "react-router-dom";
 import { VehicleTypeBaseForm } from "./baseForm";
@@ -15,7 +15,7 @@ export const AddVehicleType = () => {
     validate: zodResolver(schema),
   });
 
-  const { mutateAsync: createMutation } = useCreateVehicleType();
+  const { mutateAsync: createMutation, isLoading } = useCreateVehicleType();
 
   const save = async (values: VehicleType) => {
     const res = await createMutation(values);
@@ -26,6 +26,11 @@ export const AddVehicleType = () => {
 
   return (
     <>
+      <LoadingOverlay
+        visible={isLoading}
+        zIndex={1000}
+        overlayProps={{ radius: "lg", blur: 2 }}
+      />
       <Title order={3} style={{ textTransform: "capitalize" }}>
         Add Vehicle Type
       </Title>

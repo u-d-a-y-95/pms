@@ -18,9 +18,10 @@ export const VehicleTypeBaseForm = ({ form, state }: IBaseStoreProps) => {
           placeholder="Plase enter charge amount"
           withAsterisk
           allowNegative={false}
-          clampBehavior="strict"
           {...form?.getInputProps("charge")}
-          onChange={(e) => form?.getInputProps("charge").onChange(Number(e))}
+          onChange={(e) =>
+            form?.getInputProps("charge").onChange(e ? Number(e) : "")
+          }
           disabled={state === "view"}
         />
       </div>

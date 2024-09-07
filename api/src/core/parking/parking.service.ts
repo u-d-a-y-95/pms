@@ -50,7 +50,11 @@ export class ParkingService extends BaseService<ParkingEntity> {
   }
 
   async checkoutById(id: string) {
-    const parking = await super.findById(id);
+    const parking = await super.findById(id, {
+      relations: {
+        vehicleType: true,
+      },
+    });
     if (parking.exitTime)
       return {
         message: 'Vehicle is already exit',

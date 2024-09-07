@@ -1,4 +1,4 @@
-import { Button, NumberInput, Select, Table } from "@mantine/core";
+import { Button, LoadingOverlay, NumberInput, Select } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
 import { itemInitialValue, itemSchema } from "./utils";
 import { z } from "zod";
@@ -8,7 +8,7 @@ import { ItemList } from "./itemList";
 type Item = z.infer<typeof itemSchema>;
 
 export const ItemForm = ({ state, items, setItems }) => {
-  const { data: vehicleRes } = useGetVehicleTypes();
+  const { data: vehicleRes, isLoading, isFetching } = useGetVehicleTypes();
 
   const form = useForm({
     validateInputOnChange: true,
@@ -35,7 +35,12 @@ export const ItemForm = ({ state, items, setItems }) => {
     })) || [];
 
   return (
-    <form onReset={form.onReset}>
+    <>
+      <LoadingOverlay
+        visible={isLoading || isFetching}
+        zIndex={1000}
+        overlayProps={{ radius: "lg", blur: 2 }}
+      />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-5 items-start">
         <Select
           label="Vehicle Type"
@@ -63,7 +68,9 @@ export const ItemForm = ({ state, items, setItems }) => {
           withAsterisk
           allowNegative={false}
           {...form?.getInputProps("count")}
-          onChange={(e) => form?.getInputProps("count").onChange(Number(e))}
+          onChange={(e) =>
+            form?.getInputProps("count").onChange(e ? Number(e) : "")
+          }
           disabled={state === "view"}
         />
         <Button
@@ -81,6 +88,6 @@ export const ItemForm = ({ state, items, setItems }) => {
       <div className="my-5">
         <ItemList items={items} setItems={setItems} />
       </div>
-    </form>
+    </>
   );
 };

@@ -1,16 +1,12 @@
-import { Table } from "@mantine/core";
-import { IconEye, IconTrash } from "@tabler/icons-react";
+import { LoadingOverlay, Table } from "@mantine/core";
+import { IconTrash } from "@tabler/icons-react";
 import { ISpace, SpaceListProps } from "./index.types";
 import { ActionBtn } from "../../../base/actionBtn";
 import { confirmationModal } from "../../../base/confirmationModal";
 
 const { Thead, Tbody, Tr, Th, Td } = Table;
 
-export const SpaceList = ({
-  spaces,
-  viewStoreById,
-  deleteStore,
-}: SpaceListProps) => {
+export const SpaceList = ({ spaces, loading, deleteStore }: SpaceListProps) => {
   const deleteConformation = (id: string) => {
     confirmationModal({
       label:
@@ -21,6 +17,11 @@ export const SpaceList = ({
 
   return (
     <>
+      <LoadingOverlay
+        visible={loading}
+        zIndex={1000}
+        overlayProps={{ radius: "lg", blur: 2 }}
+      />
       <div className="mt-4">
         <Table striped withTableBorder withColumnBorders>
           <Thead>

@@ -5,8 +5,8 @@ export const vehicleInitialValue = {
   phone: "",
   address: "",
   license: "",
-  vehicleTypeId: "",
-  spaceId: "",
+  vehicleTypeId: null,
+  spaceId: null,
 };
 
 export const schema = z

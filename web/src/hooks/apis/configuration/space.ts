@@ -8,10 +8,11 @@ import {
 } from "../../../services/spaces";
 import { toast } from "../../../utils/toast";
 
-export const useGetSpaces = () => {
+export const useGetSpaces = (options = {}) => {
   return useQuery({
     queryKey: ["spaces"],
     queryFn: getSpaces,
+    ...options,
   });
 };
 

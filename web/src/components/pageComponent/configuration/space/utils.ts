@@ -7,7 +7,7 @@ export const itemInitialValue = {
 
 export const itemSchema = z.object({
   vehicleTypeId: z.string().min(1, { message: "name can't be empty" }),
-  count: z.number().positive().min(1, "count can't be empty"),
+  count: z.coerce.number().positive().min(1, "count can't be empty"),
 });
 
 export const spaceInitialValue = {

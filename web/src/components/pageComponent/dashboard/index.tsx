@@ -4,10 +4,11 @@ import { useGetVehicleTypes } from "../../../hooks/apis/configuration/vehicleTyp
 import { useGetParkings } from "../../../hooks/apis/parking";
 import { PlainCard } from "../../base/card/card";
 import { PieChart } from "@mantine/charts";
+import { LoadingOverlay } from "@mantine/core";
 
 export default function Dashboard() {
   const [date] = useState(new Date());
-  const { data: vehicleRes } = useGetVehicleTypes();
+  const { data: vehicleRes, isLoading, isFetching } = useGetVehicleTypes();
   const { data: parkingRes } = useGetParkings(date.toISOString());
   const { data: spaceRes } = useGetSpaces();
 
@@ -20,7 +21,12 @@ export default function Dashboard() {
   const totalVehicleTypes = vehicleRes?.data?.length || "";
 
   return (
-    <div>
+    <>
+      <LoadingOverlay
+        visible={isLoading || isFetching}
+        zIndex={1000}
+        overlayProps={{ radius: "lg", blur: 2 }}
+      />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <PlainCard
           label={"Total Parked"}
@@ -55,6 +61,6 @@ export default function Dashboard() {
           />
         </div>
       </div>
-    </div>
+    </>
   );
 }

@@ -19,7 +19,7 @@ const Layout = () => {
           <Links />
         </AppShell.Section>
       </AppShell.Navbar>
-      <AppShell.Main style={{ position: "relative" }}>
+      <AppShell.Main className="flex flex-col">
         <Main />
       </AppShell.Main>
     </AppShell>
