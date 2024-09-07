@@ -8,7 +8,7 @@ function getRandomHexColor(): string {
 
 export const ParkedPieChartCard = () => {
   const { data: parkingRes } = useGetParkings({
-    currentlyParked: false,
+    currentlyParked: 1,
   });
   const data =
     parkingRes?.data.reduce((acc, item) => {

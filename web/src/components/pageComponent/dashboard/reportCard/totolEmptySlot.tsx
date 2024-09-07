@@ -4,7 +4,7 @@ import { PlainCard } from "../../../base/card/card";
 
 export const TotalEmptySlot = () => {
   const { data } = useGetParkings({
-    currentlyParked: false,
+    currentlyParked: 1,
   });
   const { data: spaceRes } = useGetSpaces();
   const totalParked = (data?.data as unknown[])?.length || 0;

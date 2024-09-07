@@ -1,5 +1,5 @@
 import { ApiPropertyOptional, ApiQuery } from '@nestjs/swagger';
-import { IsBoolean, IsOptional, IsString } from 'class-validator';
+import { IsBoolean, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class GetParkingQueryDto {
   @ApiPropertyOptional()
@@ -13,7 +13,7 @@ export class GetParkingQueryDto {
   endDate?: string;
 
   @ApiPropertyOptional()
-  @IsBoolean()
+  @IsNumber()
   @IsOptional()
-  currentlyParked?: boolean;
+  currentlyParked?: number;
 }

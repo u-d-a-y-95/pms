@@ -72,11 +72,13 @@ export class ParkingService extends BaseService<ParkingEntity> {
       );
     }
     if (currentlyParked) {
+      console.log(typeof currentlyParked);
       where['exitTime'] = IsNull();
     }
     return where;
   }
   async getParkings(getParkingQueryDto: GetParkingQueryDto) {
+    console.log(getParkingQueryDto);
     const where = this.buildWhereClause(getParkingQueryDto);
     return this.parkingRepository.find({
       where: where,
