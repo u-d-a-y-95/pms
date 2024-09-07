@@ -8,7 +8,7 @@ import { PageHeader } from "../../base/pageHeader";
 import { IParking } from "./index.types";
 
 export default function Parking() {
-  const { data: res, isLoading, isFetching } = useGetParkings();
+  const { data: res } = useGetParkings();
   const { mutate: deleteMutate } = useDeleteParking();
   const { mutate: checkoutMutate } = useCheckoutById();
 
@@ -26,7 +26,6 @@ export default function Parking() {
       <PageHeader title="Parkings" addBtnPath="./add" />
       <ParkingList
         parkings={parkings}
-        isLoading={isLoading || isFetching}
         deleteParking={deleteParking}
         checkoutParking={checkoutParking}
       />

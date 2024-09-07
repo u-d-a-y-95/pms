@@ -1,7 +1,6 @@
 import { VehicleType } from "../vehicleType/index.types";
 
-export interface StoreListProps {
-  isLoading: boolean;
+export interface SpaceListProps {
   spaces: ISpace[];
   deleteStore: (id: string) => void;
   viewStoreById: (id: string) => void;

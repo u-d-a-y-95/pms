@@ -1,6 +1,6 @@
-import { LoadingOverlay, Table } from "@mantine/core";
+import { Table } from "@mantine/core";
 import { IconEye, IconTrash } from "@tabler/icons-react";
-import { ISpace, StoreListProps } from "./index.types";
+import { ISpace, SpaceListProps } from "./index.types";
 import { ActionBtn } from "../../../base/actionBtn";
 import { confirmationModal } from "../../../base/confirmationModal";
 
@@ -8,10 +8,9 @@ const { Thead, Tbody, Tr, Th, Td } = Table;
 
 export const SpaceList = ({
   spaces,
-  isLoading,
   viewStoreById,
   deleteStore,
-}: StoreListProps) => {
+}: SpaceListProps) => {
   const deleteConformation = (id: string) => {
     confirmationModal({
       label:
@@ -22,12 +21,7 @@ export const SpaceList = ({
 
   return (
     <>
-      <div className="relative mt-4">
-        <LoadingOverlay
-          visible={isLoading}
-          zIndex={1000}
-          overlayProps={{ radius: "sm", blur: 2 }}
-        />
+      <div className="mt-4">
         <Table striped withTableBorder withColumnBorders>
           <Thead>
             <Tr>
@@ -47,18 +41,11 @@ export const SpaceList = ({
                   <Td>{name}</Td>
                   <Td>
                     {capacities
-                      .map((item) => `${item.count} ${item.vehicleType.name} `)
-                      .join(" ,")}
+                      .map((item) => `${item.count} ${item.vehicleType.name}`)
+                      .join(", ")}
                   </Td>
                   <Td style={{ width: "200px" }}>
                     <div className="flex justify-center gap-3">
-                      <ActionBtn
-                        label="View"
-                        clickHandler={() => {
-                          viewStoreById(id);
-                        }}
-                        Icon={<IconEye />}
-                      />
                       <ActionBtn
                         label="Delete"
                         clickHandler={() => deleteConformation(id)}

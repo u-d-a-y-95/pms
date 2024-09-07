@@ -10,7 +10,7 @@ import { PageHeader } from "../../../base/pageHeader";
 export const Spaces = () => {
   const navigate = useNavigate();
 
-  const { data: res, isLoading, isFetching } = useGetSpaces();
+  const { data: res } = useGetSpaces();
   const { mutate: deleteMutate } = useDeleteSpace();
 
   const deleteSpace = (id: string) => {
@@ -25,10 +25,9 @@ export const Spaces = () => {
 
   return (
     <>
-      <PageHeader title="Spaces" addBtnPath="" />
+      <PageHeader title="Spaces" addBtnPath="./add" />
       <SpaceList
         spaces={spaces as ISpace[]}
-        isLoading={isLoading || isFetching}
         deleteStore={deleteSpace}
         viewStoreById={viewStoreById}
       />

@@ -9,7 +9,7 @@ import { PageHeader } from "../../../base/pageHeader";
 export const VehicleType = () => {
   const navigate = useNavigate();
 
-  const { data: res, isLoading, isFetching } = useGetVehicleTypes();
+  const { data: res } = useGetVehicleTypes();
   const { mutate: deleteMutate } = useDeleteVehicleType();
 
   const deleteVehicleType = (id: string) => {
@@ -27,7 +27,6 @@ export const VehicleType = () => {
       <PageHeader title="Vehicle Types" addBtnPath="./add" />
       <VehicleTypeList
         vehicleTypes={vehicleTypes}
-        isLoading={isLoading || isFetching}
         deleteVehicleType={deleteVehicleType}
         viewVacationTypeById={viewVehicleById}
       />

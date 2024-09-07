@@ -1,7 +1,8 @@
 import { AppShell } from "@mantine/core";
 import Topbar from "./header";
 import Links from "./nav";
-import { Outlet } from "react-router-dom";
+
+import { Main } from "./main";
 
 const Layout = () => {
   return (
@@ -18,10 +19,8 @@ const Layout = () => {
           <Links />
         </AppShell.Section>
       </AppShell.Navbar>
-      <AppShell.Main>
-        <div className="p-6">
-          <Outlet />
-        </div>
+      <AppShell.Main style={{ position: "relative" }}>
+        <Main />
       </AppShell.Main>
     </AppShell>
   );

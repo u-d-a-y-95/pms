@@ -3,8 +3,8 @@ import { http } from "../utils/http";
 export const getSpaces = () => {
   return http.get(`/spaces`);
 };
-export const createStore = (store: { storeName: string }) => {
-  return http.post("/store", store);
+export const createSpace = (space) => {
+  return http.post("/spaces", space);
 };
 
 export const updateEmployee = ({ id, employee }: any) => {

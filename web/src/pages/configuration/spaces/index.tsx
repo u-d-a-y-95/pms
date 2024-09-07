@@ -1,5 +1,5 @@
 import { Spaces } from "../../../components/pageComponent/configuration/space";
-import { ViewSpace } from "../../../components/pageComponent/configuration/space/viewSpace";
+import { AddSpace } from "../../../components/pageComponent/configuration/space/addSpace";
 
 export default function SpacePage() {
   return (
@@ -9,4 +9,4 @@ export default function SpacePage() {
   );
 }
 
-SpacePage.View = ViewSpace;
+SpacePage.Add = AddSpace;

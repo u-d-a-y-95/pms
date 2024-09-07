@@ -1,7 +1,6 @@
 import { UseFormReturnType } from "@mantine/form";
 
 export type VehicleTypeListProps = {
-  isLoading: boolean;
   vehicleTypes: VehicleType[];
   deleteVehicleType: (id: string) => void;
   viewVacationTypeById: (id: string) => void;

@@ -1,4 +1,4 @@
-import { LoadingOverlay, Table } from "@mantine/core";
+import { Table } from "@mantine/core";
 import { IconEye, IconTrash } from "@tabler/icons-react";
 import { VehicleType, VehicleTypeListProps } from "./index.types";
 import { ActionBtn } from "../../../base/actionBtn";
@@ -8,7 +8,6 @@ const { Thead, Tbody, Tr, Th, Td } = Table;
 
 export const VehicleTypeList = ({
   vehicleTypes,
-  isLoading,
   viewVacationTypeById,
   deleteVehicleType,
 }: VehicleTypeListProps) => {
@@ -22,12 +21,7 @@ export const VehicleTypeList = ({
 
   return (
     <>
-      <div className="relative mt-4">
-        <LoadingOverlay
-          visible={isLoading}
-          zIndex={1000}
-          overlayProps={{ radius: "sm", blur: 2 }}
-        />
+      <div className="mt-4">
         <Table striped withTableBorder withColumnBorders>
           <Thead>
             <Tr>

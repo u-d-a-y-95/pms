@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
-  createStore,
+  createSpace,
   deleteSpaceById,
   getSpaces,
   getStoreById,
@@ -15,14 +15,14 @@ export const useGetSpaces = () => {
   });
 };
 
-export const useCreateStores = () => {
+export const useCreateSpace = () => {
   const client = useQueryClient();
   return useMutation({
-    mutationKey: ["store", "create"],
-    mutationFn: createStore,
+    mutationKey: ["spaces", "create"],
+    mutationFn: createSpace,
     onSuccess: () => {
-      toast.success("New Store is created");
-      client.invalidateQueries(["stores"]);
+      toast.success("New space is created");
+      client.invalidateQueries(["spaces"]);
     },
     onError: (err: any) => {
       toast.error(err.message);

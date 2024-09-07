@@ -11,7 +11,7 @@ export const AppRoutes = () => {
       <Route path="/" Component={Layout}>
         <Route path="configuration">
           <Route path="spaces">
-            <Route path="view/:id" Component={SpacePage.View}></Route>
+            <Route path="add" Component={SpacePage.Add}></Route>
             <Route path="" Component={SpacePage}></Route>
           </Route>
           <Route path="vehicle-types">
